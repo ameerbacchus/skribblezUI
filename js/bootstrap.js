@@ -262,7 +262,9 @@ if (typeof jQuery === 'undefined') {
       .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
       .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
   }
-
+	
+	console.log(Carousel.interval);
+  
   Carousel.VERSION  = '3.3.4'
 
   Carousel.TRANSITION_DURATION = 600
@@ -273,7 +275,9 @@ if (typeof jQuery === 'undefined') {
     wrap: true,
     keyboard: true
   }
-
+  
+  	console.log(Carousel.interval);
+  
   Carousel.prototype.keydown = function (e) {
     if (/input|textarea/i.test(e.target.tagName)) return
     switch (e.which) {
@@ -407,12 +411,16 @@ if (typeof jQuery === 'undefined') {
   // ==========================
 
   function Plugin(option) {
+  
+
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.carousel')
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
       var action  = typeof option == 'string' ? option : options.slide
 
+	  console.log(options);
+	  
       if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
       if (typeof option == 'number') data.to(option)
       else if (action) data[action]()
@@ -463,7 +471,9 @@ if (typeof jQuery === 'undefined') {
   $(window).on('load', function () {
     $('[data-ride="carousel"]').each(function () {
       var $carousel = $(this)
+	  
       Plugin.call($carousel, $carousel.data())
+
     })
   })
 

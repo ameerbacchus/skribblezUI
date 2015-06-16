@@ -1,0 +1,218 @@
+/*!
+ * Skribblez CSS.
+ */
+
+
+/* FONTS */
+/* END -- FONTS */
+html, body, section, p, h, span, a{
+    font-family: 'Roboto', sans-serif;
+    font-size: 12pt;
+    text-decoration: none;
+}
+
+h2{
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0 0 40px 15px;
+}
+
+h3{
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0 0 20px 0;
+}
+
+p{
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.6em;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* STRUCTURE */
+
+
+/* END -- STRUCTURE */
+
+
+/*
+ * Modules - May restructure based on final codebase
+ */
+
+/* NAVBAR */
+nav {
+    padding: 40px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.shrink {
+    background: rgba(255,255,255, 0.7);
+    padding: 10px 0;
+}
+
+#brand {
+   background: transparent url('../img/sk_expand.gif') no-repeat;
+   background-position: top center;
+   background-size: contain;
+   float: left;
+   height: 64px;
+   position: relative;
+   width: 300px;
+}
+
+
+/* END -- NAVBAR */
+
+/* SECTION   */
+section{
+    padding: 40px 0;
+}
+
+.section-bg-violet{
+    background-color: #2F124A;
+}
+
+.dk-theme{
+
+}
+
+a.sk-preview-link,
+a.sk-preview-link:link,
+a.sk-preview-link:active,
+a.sk-preview-link:hover,
+a.sk-preview-link:visited{
+    display: block;
+    color: #404041;
+    position:absolute;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+}
+
+.sk-preview{
+    display: block;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.sk-preview-mask-1{
+    background-color: rgba(255,255,255,0.9);
+    background-image: url(../img/sk-preview-hover-mask.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 300px;
+    left: 0;
+    transition: all 300ms ease-in-out;
+}
+
+.sk-preview-mask-2{
+    background-color: rgba(255,255,255,0.9);
+    background-image: url(../img/sk-preview-hover-mask-2.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+.sk-preview-mask-3{
+    background-color: rgba(255,255,255,0.9);
+    background-image: url(../img/sk-preview-hover-mask-3.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 300px;
+    left: 0;
+    transition: all 300ms ease-in-out;
+}
+
+.sk-preview-mask-4{
+    background-color: rgba(255,255,255,0.9);
+    background-image: url(../img/sk-preview-hover-mask-4.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+
+
+.sk-preview:hover .sk-preview-mask-1{
+    top: 0px;
+}
+
+.sk-preview:hover .sk-preview-mask-2{
+    left: 0;
+}
+
+.sk-preview:hover .sk-preview-mask-3{
+    top: 0px;
+}
+
+.sk-preview:hover .sk-preview-mask-4{
+    right: 0px;
+}
+
+.sk-preview-snippet{
+    height: 8em;
+    padding: 0;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+.sk-snippet-details{
+    margin-top: 40px;
+}
+
+.sk-snippet-details span{
+    color: #757575;
+    font-size: .8em;
+}
+
+/* END -SECTION */
+
+
+
+
+/*
+ * END -- Modules - May restructure based on final codebase *
+ */
+
+
+
+
+/* HACKS & FIXES */
+
+.scale-w{ width: 100%;}
+
+/* END -- HACKS & FIXES */
