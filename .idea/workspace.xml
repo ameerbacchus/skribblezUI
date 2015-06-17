@@ -25,24 +25,23 @@
     <splitter split-orientation="horizontal" split-proportion="0.50859326">
       <split-first>
         <leaf>
-          <file leaf-file-name="skribblez_index.html" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="skribblez_index.html" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/skribblez_index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="431" column="51" selection-start="24054" selection-end="24054" vertical-scroll-proportion="0.5650723" vertical-offset="546" max-vertical-offset="1445">
+                <state line="200" column="36" selection-start="9897" selection-end="9897" vertical-scroll-proportion="62.192307" vertical-offset="2467" max-vertical-offset="3366">
                   <folding>
-                    <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+                    <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
                     <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
                     <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
-                    <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="skribblez-index.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="skribblez-index.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/skribblez-index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="21" column="0" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+                <state line="39" column="36" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.63752663" vertical-offset="31" max-vertical-offset="986">
                   <folding>
                     <element signature="e#0#36#0" expanded="false" />
                   </folding>
@@ -66,20 +65,20 @@
           <file leaf-file-name="skribblez.css" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/css/skribblez.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="272" column="0" selection-start="5634" selection-end="5634" vertical-scroll-proportion="0.720701" vertical-offset="2708" max-vertical-offset="3774">
+                <state line="53" column="19" selection-start="681" selection-end="681" vertical-scroll-proportion="0.55859804" vertical-offset="391" max-vertical-offset="4029">
                   <folding>
-                    <element signature="e#1946#2131#0" expanded="false" />
-                    <element signature="e#2144#2431#0" expanded="false" />
-                    <element signature="e#2811#3119#0" expanded="false" />
-                    <element signature="e#3141#3450#0" expanded="false" />
-                    <element signature="e#3473#3782#0" expanded="false" />
-                    <element signature="e#4688#4705#0" expanded="false" />
-                    <element signature="e#4752#4768#0" expanded="false" />
-                    <element signature="e#4813#4830#0" expanded="false" />
-                    <element signature="e#4876#4895#0" expanded="false" />
-                    <element signature="e#4916#5013#0" expanded="false" />
-                    <element signature="e#5034#5059#0" expanded="false" />
-                    <element signature="e#5085#5129#0" expanded="false" />
+                    <element signature="e#2089#2274#0" expanded="false" />
+                    <element signature="e#2287#2574#0" expanded="false" />
+                    <element signature="e#2954#3262#0" expanded="false" />
+                    <element signature="e#3284#3593#0" expanded="false" />
+                    <element signature="e#3616#3925#0" expanded="false" />
+                    <element signature="e#4831#4848#0" expanded="false" />
+                    <element signature="e#4895#4911#0" expanded="false" />
+                    <element signature="e#4956#4973#0" expanded="false" />
+                    <element signature="e#5019#5038#0" expanded="false" />
+                    <element signature="e#5059#5156#0" expanded="false" />
+                    <element signature="e#5177#5202#0" expanded="false" />
+                    <element signature="e#5228#5272#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -112,9 +111,9 @@
         <option value="$PROJECT_DIR$/boostrap_base_template.html" />
         <option value="$PROJECT_DIR$/js/bootstrap.js" />
         <option value="$PROJECT_DIR$/js/index.js" />
-        <option value="$PROJECT_DIR$/js/skribblez-index.js" />
         <option value="$PROJECT_DIR$/css/skribblez.css" />
         <option value="$PROJECT_DIR$/skribblez_index.html" />
+        <option value="$PROJECT_DIR$/js/skribblez-index.js" />
       </list>
     </option>
   </component>
@@ -123,6 +122,28 @@
     <option name="y" value="-320" />
     <option name="width" value="1936" />
     <option name="height" value="1096" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>JSUnresolvedFunction</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -205,6 +226,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FullScreen" value="false" />
+    <property name="SearchEverywhereHistory" value="" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -267,7 +289,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11532386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11532386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -281,6 +303,25 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11532386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USERS">
@@ -305,10 +346,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="46" column="47" selection-start="1564" selection-end="1564" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2584">
           <folding>
-            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -331,18 +371,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="1" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1224">
           <folding>
-            <element signature="e#1946#2131#0" expanded="false" />
-            <element signature="e#2144#2431#0" expanded="false" />
-            <element signature="e#2811#3119#0" expanded="false" />
-            <element signature="e#3141#3450#0" expanded="false" />
-            <element signature="e#3473#3782#0" expanded="false" />
-            <element signature="e#4688#4705#0" expanded="false" />
-            <element signature="e#4752#4768#0" expanded="false" />
-            <element signature="e#4813#4830#0" expanded="false" />
-            <element signature="e#4876#4895#0" expanded="false" />
-            <element signature="e#4916#5013#0" expanded="false" />
-            <element signature="e#5034#5059#0" expanded="false" />
-            <element signature="e#5085#5129#0" expanded="false" />
+            <element signature="e#2089#2274#0" expanded="false" />
+            <element signature="e#2287#2574#0" expanded="false" />
+            <element signature="e#2954#3262#0" expanded="false" />
+            <element signature="e#3284#3593#0" expanded="false" />
+            <element signature="e#3616#3925#0" expanded="false" />
+            <element signature="e#4831#4848#0" expanded="false" />
+            <element signature="e#4895#4911#0" expanded="false" />
+            <element signature="e#4956#4973#0" expanded="false" />
+            <element signature="e#5019#5038#0" expanded="false" />
+            <element signature="e#5059#5156#0" expanded="false" />
+            <element signature="e#5177#5202#0" expanded="false" />
+            <element signature="e#5228#5272#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -358,10 +398,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="53" selection-start="2451" selection-end="2451" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2533">
           <folding>
-            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -410,18 +449,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="16" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="1224">
           <folding>
-            <element signature="e#1946#2131#0" expanded="false" />
-            <element signature="e#2144#2431#0" expanded="false" />
-            <element signature="e#2811#3119#0" expanded="false" />
-            <element signature="e#3141#3450#0" expanded="false" />
-            <element signature="e#3473#3782#0" expanded="false" />
-            <element signature="e#4688#4705#0" expanded="false" />
-            <element signature="e#4752#4768#0" expanded="false" />
-            <element signature="e#4813#4830#0" expanded="false" />
-            <element signature="e#4876#4895#0" expanded="false" />
-            <element signature="e#4916#5013#0" expanded="false" />
-            <element signature="e#5034#5059#0" expanded="false" />
-            <element signature="e#5085#5129#0" expanded="false" />
+            <element signature="e#2089#2274#0" expanded="false" />
+            <element signature="e#2287#2574#0" expanded="false" />
+            <element signature="e#2954#3262#0" expanded="false" />
+            <element signature="e#3284#3593#0" expanded="false" />
+            <element signature="e#3616#3925#0" expanded="false" />
+            <element signature="e#4831#4848#0" expanded="false" />
+            <element signature="e#4895#4911#0" expanded="false" />
+            <element signature="e#4956#4973#0" expanded="false" />
+            <element signature="e#5019#5038#0" expanded="false" />
+            <element signature="e#5059#5156#0" expanded="false" />
+            <element signature="e#5177#5202#0" expanded="false" />
+            <element signature="e#5228#5272#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -437,10 +476,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="5" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1768">
           <folding>
-            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -456,18 +494,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="10" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1088">
           <folding>
-            <element signature="e#1946#2131#0" expanded="false" />
-            <element signature="e#2144#2431#0" expanded="false" />
-            <element signature="e#2811#3119#0" expanded="false" />
-            <element signature="e#3141#3450#0" expanded="false" />
-            <element signature="e#3473#3782#0" expanded="false" />
-            <element signature="e#4688#4705#0" expanded="false" />
-            <element signature="e#4752#4768#0" expanded="false" />
-            <element signature="e#4813#4830#0" expanded="false" />
-            <element signature="e#4876#4895#0" expanded="false" />
-            <element signature="e#4916#5013#0" expanded="false" />
-            <element signature="e#5034#5059#0" expanded="false" />
-            <element signature="e#5085#5129#0" expanded="false" />
+            <element signature="e#2089#2274#0" expanded="false" />
+            <element signature="e#2287#2574#0" expanded="false" />
+            <element signature="e#2954#3262#0" expanded="false" />
+            <element signature="e#3284#3593#0" expanded="false" />
+            <element signature="e#3616#3925#0" expanded="false" />
+            <element signature="e#4831#4848#0" expanded="false" />
+            <element signature="e#4895#4911#0" expanded="false" />
+            <element signature="e#4956#4973#0" expanded="false" />
+            <element signature="e#5019#5038#0" expanded="false" />
+            <element signature="e#5059#5156#0" expanded="false" />
+            <element signature="e#5177#5202#0" expanded="false" />
+            <element signature="e#5228#5272#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -545,43 +583,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/skribblez-index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/skribblez.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="272" column="0" selection-start="5634" selection-end="5634" vertical-scroll-proportion="0.720701" vertical-offset="2708" max-vertical-offset="3774">
+        <state line="53" column="19" selection-start="681" selection-end="681" vertical-scroll-proportion="0.55859804" vertical-offset="391" max-vertical-offset="4029">
           <folding>
-            <element signature="e#1946#2131#0" expanded="false" />
-            <element signature="e#2144#2431#0" expanded="false" />
-            <element signature="e#2811#3119#0" expanded="false" />
-            <element signature="e#3141#3450#0" expanded="false" />
-            <element signature="e#3473#3782#0" expanded="false" />
-            <element signature="e#4688#4705#0" expanded="false" />
-            <element signature="e#4752#4768#0" expanded="false" />
-            <element signature="e#4813#4830#0" expanded="false" />
-            <element signature="e#4876#4895#0" expanded="false" />
-            <element signature="e#4916#5013#0" expanded="false" />
-            <element signature="e#5034#5059#0" expanded="false" />
-            <element signature="e#5085#5129#0" expanded="false" />
+            <element signature="e#2089#2274#0" expanded="false" />
+            <element signature="e#2287#2574#0" expanded="false" />
+            <element signature="e#2954#3262#0" expanded="false" />
+            <element signature="e#3284#3593#0" expanded="false" />
+            <element signature="e#3616#3925#0" expanded="false" />
+            <element signature="e#4831#4848#0" expanded="false" />
+            <element signature="e#4895#4911#0" expanded="false" />
+            <element signature="e#4956#4973#0" expanded="false" />
+            <element signature="e#5019#5038#0" expanded="false" />
+            <element signature="e#5059#5156#0" expanded="false" />
+            <element signature="e#5177#5202#0" expanded="false" />
+            <element signature="e#5228#5272#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skribblez_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="431" column="51" selection-start="24054" selection-end="24054" vertical-scroll-proportion="0.5650723" vertical-offset="546" max-vertical-offset="1445">
+        <state line="200" column="36" selection-start="9897" selection-end="9897" vertical-scroll-proportion="62.192307" vertical-offset="2467" max-vertical-offset="3366">
           <folding>
-            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#1;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
             <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/skribblez-index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="36" selection-start="1276" selection-end="1276" vertical-scroll-proportion="0.63752663" vertical-offset="31" max-vertical-offset="986">
+          <folding>
+            <element signature="e#0#36#0" expanded="false" />
           </folding>
         </state>
       </provider>

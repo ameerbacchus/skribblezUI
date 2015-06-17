@@ -9,6 +9,7 @@ html, body, section, p, h, span, a{
     font-family: 'Roboto', sans-serif;
     font-size: 12pt;
     text-decoration: none;
+
 }
 
 h2{
@@ -43,7 +44,18 @@ p{
 
 
 /* STRUCTURE */
+/*
+body{
+    min-height: 2572px;
+}
+*/
 
+.trigger-test{
+    position: fixed;
+    right: 20px;
+    text-decoration: underline;
+    z-index: 20;
+}
 
 /* END -- STRUCTURE */
 
@@ -249,9 +261,12 @@ a.sk-preview-link:hover .sk-preview{
     background: url('../img/bg/typewriter.jpg') no-repeat;
     background-position: center;
     background-size: cover;
+    min-height: 400px;
+    position: relative;
 }
 
 .sk-start-container{
+    display: none;
     background-color: rgba(0,0,0,0.8);
     box-sizing: border-box;
     color: #ffffff;
