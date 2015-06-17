@@ -48,7 +48,11 @@ $(window).on('scroll',function(){
 
     if(   $windowScroll > starterScrollHeight  ){
         console.log('yes');
-        $('.sk-start-container').fadeIn("slow");
+//        $('.sk-start-container').fadeIn("slow");
+        $('.sk-start-container').animate({
+            opacity: 1,
+            left: "0",
+        }, 1000, function(){});
     }
 
 });

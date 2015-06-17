@@ -261,17 +261,18 @@ a.sk-preview-link:hover .sk-preview{
     background: url('../img/bg/typewriter.jpg') no-repeat;
     background-position: center;
     background-size: cover;
-    min-height: 400px;
     position: relative;
 }
 
 .sk-start-container{
-    display: none;
+    opacity: 0;
     background-color: rgba(0,0,0,0.8);
     box-sizing: border-box;
     color: #ffffff;
     margin: 0 auto;
     padding: 40px;
+    position: relative;
+    left: -100px;
     text-align: center;
     width: 50%;
 }
