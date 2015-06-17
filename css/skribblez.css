@@ -25,6 +25,14 @@ h3{
     padding: 0 0 20px 0;
 }
 
+h4{
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 1.5em;
+    margin: 0px;
+    padding: 0;
+}
+
+
 p{
     font-size: 1em;
     font-weight: 400;
@@ -236,6 +244,31 @@ a.sk-preview-link:hover .sk-preview{
     font-size: .8em;
 }
 
+.sk-start-wrapper{
+    width: 100%;
+    background: url('../img/bg/typewriter.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.sk-start-container{
+    background-color: rgba(0,0,0,0.8);
+    box-sizing: border-box;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+    width: 50%;
+}
+
+.sk-button{
+    display: inline-block;
+    background: #E58600;
+    font-weight: 300;
+    margin-top: 40px;
+    padding: 20px 50px;
+}
+
 /* END -SECTION */
 
 
@@ -251,5 +284,8 @@ a.sk-preview-link:hover .sk-preview{
 /* HACKS & FIXES */
 
 .scale-w{ width: 100%;}
+
+.carousel-control.left{background-image:none !important;}
+.carousel-control.right{background-image:none !important;}
 
 /* END -- HACKS & FIXES */

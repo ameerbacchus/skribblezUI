@@ -25,19 +25,24 @@
     <splitter split-orientation="horizontal" split-proportion="0.50859326">
       <split-first>
         <leaf>
-          <file leaf-file-name="skribblez_index.html" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="skribblez_index.html" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/skribblez_index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="40" column="23" selection-start="1393" selection-end="1393" vertical-scroll-proportion="-12.423077" vertical-offset="357" max-vertical-offset="7667">
-                  <folding />
+                <state line="431" column="51" selection-start="24054" selection-end="24054" vertical-scroll-proportion="0.5650723" vertical-offset="546" max-vertical-offset="1445">
+                  <folding>
+                    <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+                    <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
+                    <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
+                    <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="skribblez-index.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="skribblez-index.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/skribblez-index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="13" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.19936034" vertical-offset="0" max-vertical-offset="938">
+                <state line="21" column="0" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
                   <folding>
                     <element signature="e#0#36#0" expanded="false" />
                   </folding>
@@ -61,20 +66,20 @@
           <file leaf-file-name="skribblez.css" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/css/skribblez.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="64" column="0" selection-start="860" selection-end="860" vertical-scroll-proportion="0.63307774" vertical-offset="510" max-vertical-offset="3162">
+                <state line="272" column="0" selection-start="5634" selection-end="5634" vertical-scroll-proportion="0.720701" vertical-offset="2708" max-vertical-offset="3774">
                   <folding>
-                    <element signature="e#1835#2020#0" expanded="false" />
-                    <element signature="e#2033#2320#0" expanded="false" />
-                    <element signature="e#2700#3008#0" expanded="false" />
-                    <element signature="e#3030#3339#0" expanded="false" />
-                    <element signature="e#3362#3671#0" expanded="false" />
-                    <element signature="e#4577#4594#0" expanded="false" />
-                    <element signature="e#4641#4657#0" expanded="false" />
-                    <element signature="e#4702#4719#0" expanded="false" />
-                    <element signature="e#4765#4784#0" expanded="false" />
-                    <element signature="e#4805#4902#0" expanded="false" />
-                    <element signature="e#4923#4948#0" expanded="false" />
-                    <element signature="e#4974#5018#0" expanded="false" />
+                    <element signature="e#1946#2131#0" expanded="false" />
+                    <element signature="e#2144#2431#0" expanded="false" />
+                    <element signature="e#2811#3119#0" expanded="false" />
+                    <element signature="e#3141#3450#0" expanded="false" />
+                    <element signature="e#3473#3782#0" expanded="false" />
+                    <element signature="e#4688#4705#0" expanded="false" />
+                    <element signature="e#4752#4768#0" expanded="false" />
+                    <element signature="e#4813#4830#0" expanded="false" />
+                    <element signature="e#4876#4895#0" expanded="false" />
+                    <element signature="e#4916#5013#0" expanded="false" />
+                    <element signature="e#5034#5059#0" expanded="false" />
+                    <element signature="e#5085#5129#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -107,9 +112,9 @@
         <option value="$PROJECT_DIR$/boostrap_base_template.html" />
         <option value="$PROJECT_DIR$/js/bootstrap.js" />
         <option value="$PROJECT_DIR$/js/index.js" />
-        <option value="$PROJECT_DIR$/skribblez_index.html" />
-        <option value="$PROJECT_DIR$/css/skribblez.css" />
         <option value="$PROJECT_DIR$/js/skribblez-index.js" />
+        <option value="$PROJECT_DIR$/css/skribblez.css" />
+        <option value="$PROJECT_DIR$/skribblez_index.html" />
       </list>
     </option>
   </component>
@@ -299,7 +304,12 @@
     <entry file="file://$PROJECT_DIR$/skribblez_index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="46" column="47" selection-start="1564" selection-end="1564" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2584">
-          <folding />
+          <folding>
+            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -321,18 +331,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="1" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1224">
           <folding>
-            <element signature="e#1835#2020#0" expanded="false" />
-            <element signature="e#2033#2320#0" expanded="false" />
-            <element signature="e#2700#3008#0" expanded="false" />
-            <element signature="e#3030#3339#0" expanded="false" />
-            <element signature="e#3362#3671#0" expanded="false" />
-            <element signature="e#4577#4594#0" expanded="false" />
-            <element signature="e#4641#4657#0" expanded="false" />
-            <element signature="e#4702#4719#0" expanded="false" />
-            <element signature="e#4765#4784#0" expanded="false" />
-            <element signature="e#4805#4902#0" expanded="false" />
-            <element signature="e#4923#4948#0" expanded="false" />
-            <element signature="e#4974#5018#0" expanded="false" />
+            <element signature="e#1946#2131#0" expanded="false" />
+            <element signature="e#2144#2431#0" expanded="false" />
+            <element signature="e#2811#3119#0" expanded="false" />
+            <element signature="e#3141#3450#0" expanded="false" />
+            <element signature="e#3473#3782#0" expanded="false" />
+            <element signature="e#4688#4705#0" expanded="false" />
+            <element signature="e#4752#4768#0" expanded="false" />
+            <element signature="e#4813#4830#0" expanded="false" />
+            <element signature="e#4876#4895#0" expanded="false" />
+            <element signature="e#4916#5013#0" expanded="false" />
+            <element signature="e#5034#5059#0" expanded="false" />
+            <element signature="e#5085#5129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -347,7 +357,12 @@
     <entry file="file://$PROJECT_DIR$/skribblez_index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="53" selection-start="2451" selection-end="2451" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2533">
-          <folding />
+          <folding>
+            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -355,7 +370,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="263" column="3" selection-start="7461" selection-end="7461" vertical-scroll-proportion="0.0" vertical-offset="4471" max-vertical-offset="24463">
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
             <element signature="e#1191#3003#0" expanded="false" />
             <element signature="e#3454#6278#0" expanded="false" />
             <element signature="e#7757#7962#0" expanded="false" />
@@ -395,18 +410,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="16" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="1224">
           <folding>
-            <element signature="e#1835#2020#0" expanded="false" />
-            <element signature="e#2033#2320#0" expanded="false" />
-            <element signature="e#2700#3008#0" expanded="false" />
-            <element signature="e#3030#3339#0" expanded="false" />
-            <element signature="e#3362#3671#0" expanded="false" />
-            <element signature="e#4577#4594#0" expanded="false" />
-            <element signature="e#4641#4657#0" expanded="false" />
-            <element signature="e#4702#4719#0" expanded="false" />
-            <element signature="e#4765#4784#0" expanded="false" />
-            <element signature="e#4805#4902#0" expanded="false" />
-            <element signature="e#4923#4948#0" expanded="false" />
-            <element signature="e#4974#5018#0" expanded="false" />
+            <element signature="e#1946#2131#0" expanded="false" />
+            <element signature="e#2144#2431#0" expanded="false" />
+            <element signature="e#2811#3119#0" expanded="false" />
+            <element signature="e#3141#3450#0" expanded="false" />
+            <element signature="e#3473#3782#0" expanded="false" />
+            <element signature="e#4688#4705#0" expanded="false" />
+            <element signature="e#4752#4768#0" expanded="false" />
+            <element signature="e#4813#4830#0" expanded="false" />
+            <element signature="e#4876#4895#0" expanded="false" />
+            <element signature="e#4916#5013#0" expanded="false" />
+            <element signature="e#5034#5059#0" expanded="false" />
+            <element signature="e#5085#5129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -421,7 +436,12 @@
     <entry file="file://$PROJECT_DIR$/skribblez_index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="5" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1768">
-          <folding />
+          <folding>
+            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -436,18 +456,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="10" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="1088">
           <folding>
-            <element signature="e#1835#2020#0" expanded="false" />
-            <element signature="e#2033#2320#0" expanded="false" />
-            <element signature="e#2700#3008#0" expanded="false" />
-            <element signature="e#3030#3339#0" expanded="false" />
-            <element signature="e#3362#3671#0" expanded="false" />
-            <element signature="e#4577#4594#0" expanded="false" />
-            <element signature="e#4641#4657#0" expanded="false" />
-            <element signature="e#4702#4719#0" expanded="false" />
-            <element signature="e#4765#4784#0" expanded="false" />
-            <element signature="e#4805#4902#0" expanded="false" />
-            <element signature="e#4923#4948#0" expanded="false" />
-            <element signature="e#4974#5018#0" expanded="false" />
+            <element signature="e#1946#2131#0" expanded="false" />
+            <element signature="e#2144#2431#0" expanded="false" />
+            <element signature="e#2811#3119#0" expanded="false" />
+            <element signature="e#3141#3450#0" expanded="false" />
+            <element signature="e#3473#3782#0" expanded="false" />
+            <element signature="e#4688#4705#0" expanded="false" />
+            <element signature="e#4752#4768#0" expanded="false" />
+            <element signature="e#4813#4830#0" expanded="false" />
+            <element signature="e#4876#4895#0" expanded="false" />
+            <element signature="e#4916#5013#0" expanded="false" />
+            <element signature="e#5034#5059#0" expanded="false" />
+            <element signature="e#5085#5129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -496,7 +516,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="1077" column="18" selection-start="31241" selection-end="31241" vertical-scroll-proportion="-1.5989189" vertical-offset="5627" max-vertical-offset="24735">
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
             <element signature="e#1191#3003#0" expanded="false" />
             <element signature="e#3454#6278#0" expanded="false" />
             <element signature="e#7757#7962#0" expanded="false" />
@@ -525,38 +545,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/skribblez-index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <folding>
+            <element signature="e#0#36#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/skribblez.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="860" selection-end="860" vertical-scroll-proportion="0.63307774" vertical-offset="510" max-vertical-offset="3162">
+        <state line="272" column="0" selection-start="5634" selection-end="5634" vertical-scroll-proportion="0.720701" vertical-offset="2708" max-vertical-offset="3774">
           <folding>
-            <element signature="e#1835#2020#0" expanded="false" />
-            <element signature="e#2033#2320#0" expanded="false" />
-            <element signature="e#2700#3008#0" expanded="false" />
-            <element signature="e#3030#3339#0" expanded="false" />
-            <element signature="e#3362#3671#0" expanded="false" />
-            <element signature="e#4577#4594#0" expanded="false" />
-            <element signature="e#4641#4657#0" expanded="false" />
-            <element signature="e#4702#4719#0" expanded="false" />
-            <element signature="e#4765#4784#0" expanded="false" />
-            <element signature="e#4805#4902#0" expanded="false" />
-            <element signature="e#4923#4948#0" expanded="false" />
-            <element signature="e#4974#5018#0" expanded="false" />
+            <element signature="e#1946#2131#0" expanded="false" />
+            <element signature="e#2144#2431#0" expanded="false" />
+            <element signature="e#2811#3119#0" expanded="false" />
+            <element signature="e#3141#3450#0" expanded="false" />
+            <element signature="e#3473#3782#0" expanded="false" />
+            <element signature="e#4688#4705#0" expanded="false" />
+            <element signature="e#4752#4768#0" expanded="false" />
+            <element signature="e#4813#4830#0" expanded="false" />
+            <element signature="e#4876#4895#0" expanded="false" />
+            <element signature="e#4916#5013#0" expanded="false" />
+            <element signature="e#5034#5059#0" expanded="false" />
+            <element signature="e#5085#5129#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/skribblez_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="23" selection-start="1393" selection-end="1393" vertical-scroll-proportion="-12.423077" vertical-offset="357" max-vertical-offset="7667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/skribblez-index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.19936034" vertical-offset="0" max-vertical-offset="938">
+        <state line="431" column="51" selection-start="24054" selection-end="24054" vertical-scroll-proportion="0.5650723" vertical-offset="546" max-vertical-offset="1445">
           <folding>
-            <element signature="e#0#36#0" expanded="false" />
+            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#1;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#section#2;tag#body#0;tag#html#0" expanded="false" />
           </folding>
         </state>
       </provider>

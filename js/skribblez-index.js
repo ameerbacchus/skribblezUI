@@ -20,10 +20,4 @@ $(window).on('scroll',function(){
         $('#brand').removeClass('shrink-brand');
     }
 
-//    if (stop > mainbottom) {
-//        $('nav').addClass('shrink');
-//    } else {
-//        $('nav').removeClass('shrink');
-//    }
-
 });
