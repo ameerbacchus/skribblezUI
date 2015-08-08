@@ -1,0 +1,307 @@
+/*!
+ * Skribblez CSS.
+ */
+
+
+/* FONTS */
+/* END -- FONTS */
+html, body, section, p, h, span, a{
+    font-family: 'Roboto', sans-serif;
+    font-size: 12pt;
+    text-decoration: none;
+
+}
+
+h2{
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0 0 40px 15px;
+}
+
+h3{
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0 0 20px 0;
+}
+
+h4{
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 1.5em;
+    margin: 0px;
+    padding: 0;
+}
+
+
+p{
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.6em;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* STRUCTURE */
+/*
+body{
+    min-height: 2572px;
+}
+*/
+
+.trigger-test{
+    position: fixed;
+    right: 20px;
+    text-decoration: underline;
+    z-index: 20;
+}
+
+/* END -- STRUCTURE */
+
+
+/*
+ * Modules - May restructure based on final codebase
+ */
+
+/* NAVBAR */
+nav {
+    padding: 40px 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: all 100ms ease-in;
+}
+
+.shrink {
+    background: rgba(255,255,255, 0.7);
+    padding: 10px 0;
+    position: fixed !important;
+}
+
+#brand {
+   background: transparent url('../img/sk_expand.gif') no-repeat;
+   background-position: top center;
+   background-size: contain;
+   float: left;
+   height: 64px;
+   position: relative;
+   width: 300px;
+}
+
+.shrink-brand{
+    background: transparent url('../img/sk_pen.gif') no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    float: left;
+    height: 40px !important;
+    position: relative;
+    width: 200px !important;
+}
+
+/* END -- NAVBAR */
+
+/* SECTION   */
+section{
+    padding: 60px 0;
+}
+
+.section-bg-paper1{
+    background: url(../img/bg/paper-texture-5.jpg) no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+.section-bg-paper2{
+    background: url(../img/bg/paper-texture-4.jpg) no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+
+
+a.sk-preview-link,
+a.sk-preview-link:link,
+a.sk-preview-link:active,
+a.sk-preview-link:hover,
+a.sk-preview-link:visited{
+    display: block;
+    color: #404041;
+    position: relative;
+    top: 0;
+    left: 0;
+    text-decoration: none;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.sk-preview{
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 200ms ease-in-out;
+       -moz-transition: all 200ms ease-in-out;
+        -ms-transition: all 200ms ease-in-out;
+         -o-transition: all 200ms ease-in-out;
+            transition: all 200ms ease-in-out;
+}
+
+a.sk-preview-link:hover .sk-preview{
+    opacity: 0.1;
+    transform: scale(0.8);
+}
+
+.sk-preview-mask-bottom{
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 300px;
+    left: 0;
+    transition: all 400ms ease-in-out;
+}
+
+.sk-preview-mask-right{
+    background-image: url(../img/sk-preview-hover-mask-2.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 100%;
+    transition: all 400ms ease-in-out;
+}
+
+.sk-preview-mask-top{
+    background-image: url(../img/sk-preview-hover-mask-3.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 300px;
+    left: 0;
+    transition: all 400ms ease-in-out;
+}
+
+.sk-preview-mask-left{
+    background-image: url(../img/sk-preview-hover-mask-4.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 100%;
+    transition: all 400ms ease-in-out;
+}
+
+.sk-mask-1{background-image: url(../img/sk-preview-hover-mask.png);}
+.sk-mask-2{background-image: url(../img/sk-preview-hover-mask-2.png);}
+.sk-mask-3{background-image: url(../img/sk-preview-hover-mask-3.png);}
+.sk-mask-4{background-image: url(../img/sk-preview-hover-mask-4.png);}
+.sk-mask-5{background-image: url(../img/sk-preview-hover-mask-5.png);}
+.sk-mask-6{background-image: url(../img/sk-preview-hover-mask-6.png);}
+.sk-mask-7{background-image: url(../img/sk-preview-hover-mask-7.png);}
+.sk-mask-8{background-image: url(../img/sk-preview-hover-mask-8.png);}
+.sk-mask-9{background-image: url(../img/sk-preview-hover-mask-9.png);}
+.sk-mask-10{background-image: url(../img/sk-preview-hover-mask-10.png);}
+.sk-mask-11{background-image: url(../img/sk-preview-hover-mask-11.png);}
+.sk-mask-12{background-image: url(../img/sk-preview-hover-mask-12.png);}
+
+
+.sk-preview-link:hover .sk-preview-mask-bottom{
+    top: 0px;
+}
+
+.sk-preview-link:hover .sk-preview-mask-right{
+    left: 0;
+}
+
+.sk-preview-link:hover .sk-preview-mask-top{
+    top: 0px;
+}
+
+.sk-preview-link:hover .sk-preview-mask-left{
+    right: 0px;
+}
+
+.sk-preview-snippet{
+    height: 8em;
+    padding: 0;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+}
+
+.sk-snippet-details{
+    margin-top: 40px;
+}
+
+.sk-snippet-details span{
+    color: #757575;
+    font-size: .8em;
+}
+
+.sk-start-wrapper{
+    width: 100%;
+    background: url('../img/bg/typewriter.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.sk-start-container{
+    opacity: 0;
+    background-color: rgba(0,0,0,0.8);
+    box-sizing: border-box;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 40px;
+    position: relative;
+    left: -100px;
+    text-align: center;
+    width: 50%;
+}
+
+.sk-button{
+    display: inline-block;
+    background: #E58600;
+    font-weight: 300;
+    margin-top: 40px;
+    padding: 20px 50px;
+}
+
+/* END -SECTION */
+
+
+
+
+/*
+ * END -- Modules - May restructure based on final codebase *
+ */
+
+
+
+
+/* HACKS & FIXES */
+
+.scale-w{ width: 100%;}
+
+.carousel-control.left{background-image:none !important;}
+.carousel-control.right{background-image:none !important;}
+
+/* END -- HACKS & FIXES */
