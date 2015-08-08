@@ -16,25 +16,32 @@
 
         // assign 'this' to a var so we always have a simple reference to it
         var vm = this;
+//        vm.starters = [];
 
+        // Skribblez API service
         var api = SkribblezApiService;
 
+//        vm.starters = api.getStarters();
+
+        // request starters
         api.getStarters().then(function(data) {
-            // @todo
+            vm.starters = data.starters;
         });
 
         //-- just testing
-        api.getChapter('{5606E05E-F7F2-48D7-8172-4410F7A44820}').then(function(data) {
-            console.log('home chapter', data);
-        });
-
-        api.getChapterPath('{7E11B3C4-9488-427D-98B6-1AB94B072D6B}').then(function(data) {
-            console.log('home path', arguments);
-        });
-
-        api.getChapterComments('{7E11B3C4-9488-427D-98B6-1AB94B072D6B}').then(function(data) {
-            console.log('home comments', arguments);
-        });
+//        var chapterGuid = '{E4CA4CD0-7B48-4503-BEC2-D1C01CA1EB91}';
+//        api.getChapter(chapterGuid).then(function(data) {
+//            console.log('home chapter', data);
+//        });
+//
+//        api.getChapterPath(chapterGuid).then(function(data) {
+//            console.log('home path', data);
+//        });
+//
+//        api.getChapterComments(chapterGuid).then(function(data) {
+//            console.log('home comments', data);
+//        });
+        //-- done testing
 
         console.log('HomeCtrl', vm);
     }

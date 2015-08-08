@@ -34,6 +34,9 @@
          */
         function getStarters() {
             return ra.one('starters').get().then(function(data) {
+
+                // @todo -- create model
+
                 return data.plain();
             });
         }
@@ -45,6 +48,9 @@
          */
         function getChapter(guid) {
             return ra.one('chapter', guid).get().then(function(data) {
+
+                // @todo -- create model
+
                 return data.plain();
             });
         }
@@ -52,12 +58,13 @@
         /**
          * GET a chapters hierarchal path
          *
-         * @todo -- this call is failing with the test guid used in HomeCtrl
-         *
          * @return Promise
          */
         function getChapterPath(guid) {
             return ra.one('chapter', guid).one('path').get().then(function(data) {
+
+                // @todo -- create model
+
                 return data.plain();
             });
         }
@@ -69,10 +76,12 @@
          */
         function getChapterComments(guid) {
             return ra.one('chapter', guid).one('comments').get().then(function(data) {
+
+                // @todo -- create model
+
                 return data.plain();
             });
         }
-
 
 
         // return the API object

@@ -1,1 +1,8 @@
-home
+<div class="starters">
+    <h3>Starters</h3>
+    <div ng-repeat="starter in hc.starters">
+        <!-- todo create directive for this -->
+        <h4 ng-bind="starter.title"></h4>
+        <p ng-bind="starter.body"></p>
+    </div>
+</div>

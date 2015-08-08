@@ -27,25 +27,29 @@
                 // Home page
                 .when(URLS.home, {
                     templateUrl: TEMPLATES.home,
-                    controller: 'HomeCtrl'
+                    controller: 'HomeCtrl',
+                    controllerAs: 'hc'
                 })
 
                 // 'Explore All' page
                 .when(URLS.explore, {
                     templateUrl: TEMPLATES.explore,
-                    controller: 'ExploreCtrl'
+                    controller: 'ExploreCtrl',
+                    controllerAs: 'ec'
                 })
 
                 // 'Explore Category' page
                 .when(URLS.category, {
                     templateUrl: TEMPLATES.category,
-                    controller: 'CategoryCtrl'
+                    controller: 'CategoryCtrl',
+                    controllerAs: 'cc'
                 })
 
                 // Single story page
                 .when(URLS.story, {
                     templateUrl: TEMPLATES.story,
-                    controller: 'StoryCtrl'
+                    controller: 'StoryCtrl',
+                    controllerAs: 'sc'
                 })
 
                 // Redirect to the home page if it's an unrecognized url
