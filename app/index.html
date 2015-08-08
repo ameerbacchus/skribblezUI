@@ -9,7 +9,8 @@
 
     <!-- app styles -->
     <link rel="icon" href="img/favico.png" />
-    <link rel="stylesheet" href="/css/skribblez.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/shared.css" />
 
 <!-- /CSS -->
 
@@ -18,8 +19,8 @@
     <!-- dependencies -->
     <script type="text/javascript" src="_libs/angular/angular.min.js"></script>
     <script type="text/javascript" src="_libs/angular-route/angular-route.min.js"></script>
-    <!-- <script type="text/javascript" src="_libs/lodash/lodash.min.js"></script> -->
-    <!-- <script type="text/javascript" src="_libs/restangular/src/restangular.js"></script> -->
+    <script type="text/javascript" src="_libs/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="_libs/restangular/src/restangular.js"></script>
 
     <!-- app instantiation -->
     <script type="text/javascript" src="app.js"></script>
@@ -36,7 +37,11 @@
 
 <body>
 
+    <header>[Header]</header>
+
     <div ng-view></div>
+
+    <footer>[Footer]</footer>
 
 </body>
 </html>

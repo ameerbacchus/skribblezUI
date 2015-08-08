@@ -1,12 +1,8 @@
 (function() {
     'use strict';
 
-    function getTemplateUrl() {
-
-    }
-
     // Declare app level module which depends on views, and components
-    var app = angular.module('skribblez', ['ngRoute']);
+    var app = angular.module('skribblez', ['ngRoute', 'restangular']);
 
     app
         // Route urls
@@ -56,21 +52,14 @@
                 .otherwise({
                     redirectTo: URLS.home
                 });
-        }]);
+        }])
 
-//        .config(['RestangularProvider', function(RestangularProvider) {
-//
-//            // Base URL & Suffix
-//            // RestangularProvider.setBaseUrl(AppConfig.apiBaseUrl + '/api');
-//            // RestangularProvider.setRequestSuffix('.json');
-//            // RestangularProvider.setFullResponse(true);
-//
-//            // Set default Content-Type header to difuse DELETE issues across browsers
-//            RestangularProvider.setDefaultHeaders({
-//                'Content-Type': 'application/json'
-//            });
-//
-//        }])
+        .config(['RestangularProvider', function(RestangularProvider) {
+            // Set default Content-Type header to difuse DELETE issues across browsers
+            RestangularProvider.setDefaultHeaders({
+                'Content-Type': 'application/json'
+            });
+        }]);
 
 //    config(['$routeProvider', function($routeProvider) {
 //        $routeProvider
