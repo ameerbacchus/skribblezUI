@@ -1,0 +1,14 @@
+{
+  "name": "skribblez",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Skribblez",
+  "repository": "",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.3.1"
+  },
+  "scripts": {
+    "postinstall": "bower install"
+  }
+}

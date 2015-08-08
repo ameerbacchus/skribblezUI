@@ -1,0 +1,42 @@
+<html ng-app="skribblez">
+<head>
+    <title>Skribblez</title>
+
+<!-- CSS -->
+    <!-- dependencies -->
+    <link href="http://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="_libs/fontawesome/css/font-awesome.min.css" />
+
+    <!-- app styles -->
+    <link rel="icon" href="img/favico.png" />
+    <link rel="stylesheet" href="/css/skribblez.css" />
+
+<!-- /CSS -->
+
+
+<!-- JavaScript -->
+    <!-- dependencies -->
+    <script type="text/javascript" src="_libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="_libs/angular-route/angular-route.min.js"></script>
+    <!-- <script type="text/javascript" src="_libs/lodash/lodash.min.js"></script> -->
+    <!-- <script type="text/javascript" src="_libs/restangular/src/restangular.js"></script> -->
+
+    <!-- app instantiation -->
+    <script type="text/javascript" src="app.js"></script>
+
+    <!-- controllers -->
+    <script type="text/javascript" src="controller/HomeCtrl.js"></script>
+    <script type="text/javascript" src="controller/ExploreCtrl.js"></script>
+    <script type="text/javascript" src="controller/CategoryCtrl.js"></script>
+    <script type="text/javascript" src="controller/StoryCtrl.js"></script>
+
+<!-- /JavaScript -->
+
+</head>
+
+<body>
+
+    <div ng-view></div>
+
+</body>
+</html>

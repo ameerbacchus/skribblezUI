@@ -1,2 +1,0 @@
-# skribblezUI
-collaborative writing site
