@@ -5,6 +5,9 @@
     var app = angular.module('skribblez', ['ngRoute', 'restangular']);
 
     app
+        // debug constant -- @todo set to false before going live
+        .constant('SKRIBBLEZ_DEBUG', true)
+
         // API url -- @todo -- update before going live
         .constant('API_URL', 'http://api-local.skribblez.com:8380/')
 

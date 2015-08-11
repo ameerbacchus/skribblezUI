@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('skribblez')
-        .service('BaseModel', function() {
+        .service('BaseModel', ['SKRIBBLEZ_DEBUG', function(SKRIBBLEZ_DEBUG) {
 
             /**
              * [Constructor]
@@ -21,7 +21,9 @@
                 if (typeof this[key] !== 'undefined') {
                     return this[key];
                 } else {
-                    console.log('.get() failed: undefined key "'+ key +' cannot be retrieved"');
+                    if (SKRIBBLEZ_DEBUG) {
+                        console.info('.get() failed: undefined key "'+ key +' cannot be retrieved"');
+                    }
                 }
             };
 
@@ -36,14 +38,23 @@
                 if (typeof this[key] !== 'undefined') {
                     this[key] = value;
                 } else {
-                    console.log('.set() failed: undefined key "'+ key +' cannot be set"');
+                    if (SKRIBBLEZ_DEBUG) {
+                        console.info('.set() failed: undefined key "'+ key +'" cannot be set', this);
+                    }
                 }
 
                 return this;
             };
 
+            /**
+             * Function to call after building a model
+             *
+             * @abstract
+             */
+            BaseModel.prototype.postProcess = function() {};
+
             // return class
             return BaseModel;
-        });
+        }]);
 
 })();

@@ -8,7 +8,6 @@
              * [Constructor]
              */
             function ChapterModel() {
-
                 /*
                  * @var string
                  */
@@ -65,7 +64,7 @@
                 this.next = [];
 
                 /*
-                 * @var RatingModel
+                 * @var object
                  */
                 this.rating = null;
 

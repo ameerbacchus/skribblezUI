@@ -5,6 +5,8 @@
         .factory('ModelBuilderService', [
             'UserModel',
             'ChapterModel',
+            'CommentModel',
+            'RatingModel',
             ModelBuilderService
         ]);
 
@@ -13,7 +15,7 @@
      *
      * @return object
      */
-    function ModelBuilderService(UserModel, ChapterModel) {
+    function ModelBuilderService(UserModel, ChapterModel, CommentModel, RatingModel) {
 
         /*
          * Object for storing each model class, as well as custom mappings for response values that should
@@ -42,6 +44,21 @@
                         classKey: 'Chapter'
                     }
                 }
+            },
+            Comment: {
+                modelClass: CommentModel,
+                modelMapping: {
+                    user: {
+                        modelKey: 'user',
+                        classKey: 'User'
+                    }
+                }
+            },
+            Rating: {
+                modelClass: RatingModel,
+                modelMapping: {
+
+                }
             }
         };
 
@@ -51,7 +68,7 @@
         };
 
         /**
-         * @todo
+         * Takes in response data from the API and builds model objects from them
          *
          * @param string classKey
          * @param object data
@@ -69,16 +86,50 @@
         }
 
         /**
-         * @todo
+         * Clean up a data object before parsing through it set model values
+         *
+         * @param object data
+         * @return object
+         */
+        function cleanDataObj(data) {
+            /*
+             * An array of keys we don't want to pay attention to
+             * Doctrine sends excess stuff back sometimes; delete it here to avoid
+             * unnecessary warnings.
+             */
+            var excludedKeys = ['__isInitialized__'];
+            for (var i = 0, len = excludedKeys.length; i < len; i++) {
+                var eKey = excludedKeys[i];
+                if (typeof data[eKey] !== 'undefined') {
+                    delete data[eKey];
+                }
+            }
+
+            return data;
+        }
+
+        /**
+         * Builds a single model object from response data
          *
          * @param string classKey
          * @param object data
          */
         function buildModel(classKey, data) {
+            if (data === null) {
+                return null;
+            }
+
             var config = modelConfig[classKey],
                 model = new config.modelClass(),
                 customMapping = config.modelMapping ? config.modelMapping : {};
 
+            data = cleanDataObj(data);
+
+            // @todo -- implement in-memory caching of models to prevent creation of duplicate objects in memory
+
+            /*
+             * Loop through the data object and set values on the model
+             */
             for (var key in data) {
                 if (typeof customMapping[key] !== 'undefined') {
                     var cmap = customMapping[key],
@@ -96,11 +147,13 @@
                 }
             }
 
+            model.postProcess();
+
             return model;
         }
 
         /**
-         * @todo
+         * Builds an array of models from response data
          *
          * @param string classKey
          * @param array<object> data

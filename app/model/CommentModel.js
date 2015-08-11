@@ -2,12 +2,12 @@
     'use strict';
 
     angular.module('skribblez')
-        .service('UserModel', ['BaseModel', function(BaseModel) {
+        .service('CommentModel', ['BaseModel', function(BaseModel) {
 
             /**
              * [Constructor]
              */
-            function UserModel() {
+            function CommentModel() {
                 /*
                  * @var string
                  */
@@ -26,31 +26,19 @@
                 /*
                  * @var string
                  */
-                this.firstName = '';
+                this.body = '';
 
                 /*
-                 * @var string
+                 * @var UserModel
                  */
-                this.lastName = '';
-
-                /*
-                 * @var string
-                 */
-                this.fullName = '';
+                this.user = null;
             }
 
             // Extend BaseModel
-            UserModel.prototype = Object.create(BaseModel.prototype);
-
-            /**
-             * Post-process function
-             */
-            UserModel.prototype.postProcess = function() {
-                this.fullName = this.firstName + ' ' + this.lastName;
-            };
+            CommentModel.prototype = Object.create(BaseModel.prototype);
 
             // return class
-            return UserModel;
+            return CommentModel;
         }]);
 
 })();

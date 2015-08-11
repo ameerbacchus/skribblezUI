@@ -53,11 +53,20 @@
          */
         function getChapter(guid) {
             return ra.one('chapter', guid).get().then(function(data) {
+                var rawData = data.plain(),
+                    chapter = ModelBuilderService.build('Chapter', rawData.chapter),
+                    nextChapters = ModelBuilderService.build('Chapter', rawData.next),
+                    comments = ModelBuilderService.build('Comment', rawData.comments),
+                    rating = rawData.rating,
+                    userRating = ModelBuilderService.build('Rating', rawData.userRating);
 
-                // @todo -- create model
-                console.log('getChapter', data.plain());
+                chapter
+                    .set('next', nextChapters)
+                    .set('comments', comments)
+                    .set('rating', rating)
+                    .set('userRating', userRating);
 
-                return data.plain();
+                return chapter;
             });
         }
 
