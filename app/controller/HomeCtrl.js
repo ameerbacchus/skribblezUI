@@ -16,33 +16,53 @@
 
         // assign 'this' to a var so we always have a simple reference to it
         var vm = this;
-//        vm.starters = [];
+
+        // story starters (1st chapters)
+        vm.starters = [];
 
         // Skribblez API service
         var api = SkribblezApiService;
-
-//        vm.starters = api.getStarters();
 
         // request starters
         api.getStarters().then(function(data) {
             vm.starters = data.starters;
         });
 
-        //-- just testing
-//        var chapterGuid = '{E4CA4CD0-7B48-4503-BEC2-D1C01CA1EB91}';
-//        api.getChapter(chapterGuid).then(function(data) {
-//            console.log('home chapter', data);
-//        });
-//
-//        api.getChapterPath(chapterGuid).then(function(data) {
-//            console.log('home path', data);
-//        });
-//
-//        api.getChapterComments(chapterGuid).then(function(data) {
-//            console.log('home comments', data);
-//        });
-        //-- done testing
+        this.testApi(api);    //-- @todo -- just for resting; remove this eventually
 
         console.log('HomeCtrl', vm);
     }
+
+    /**
+     * Function to test API endpoints
+     *
+     * @todo -- remove eventually
+     *
+     * @param SkribblezApiService api
+     * @return this
+     */
+    HomeCtrl.prototype.testApi = function(api) {
+        var chapterGuid = '{E4CA4CD0-7B48-4503-BEC2-D1C01CA1EB91}';
+
+        // GET single chapter
+        api.getChapter(chapterGuid).then(function(data) {
+            console.log('home chapter', data);
+        });
+
+        // GET chapter path
+        api.getChapterPath(chapterGuid).then(function(data) {
+            console.log('home path', data);
+        });
+
+        // GET chapter comments
+        api.getChapterComments(chapterGuid).then(function(data) {
+            console.log('home comments', data);
+        });
+
+        // POST a new starter (1st chapter)
+//        api.postStarter('test title 1', 'test body 2').then(function(newStarter) {
+//            console.log('newStarter', newStarter);
+//        });
+    };
+
 })();

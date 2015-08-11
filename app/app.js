@@ -5,8 +5,11 @@
     var app = angular.module('skribblez', ['ngRoute', 'restangular']);
 
     app
+        // API url -- @todo -- update before going live
+        .constant('API_URL', 'http://api-local.skribblez.com:8380/')
+
         // Route urls
-        .constant('URLS', {
+        .constant('ROUTES', {
             home: '/',
             explore: '/explore',
             category: '/category/:categoryId',
@@ -22,31 +25,31 @@
         });
 
     app
-        .config(['$routeProvider', 'URLS', 'TEMPLATES', function($routeProvider, URLS, TEMPLATES) {
+        .config(['$routeProvider', 'ROUTES', 'TEMPLATES', function($routeProvider, ROUTES, TEMPLATES) {
             $routeProvider
                 // Home page
-                .when(URLS.home, {
+                .when(ROUTES.home, {
                     templateUrl: TEMPLATES.home,
                     controller: 'HomeCtrl',
                     controllerAs: 'hc'
                 })
 
                 // 'Explore All' page
-                .when(URLS.explore, {
+                .when(ROUTES.explore, {
                     templateUrl: TEMPLATES.explore,
                     controller: 'ExploreCtrl',
                     controllerAs: 'ec'
                 })
 
                 // 'Explore Category' page
-                .when(URLS.category, {
+                .when(ROUTES.category, {
                     templateUrl: TEMPLATES.category,
                     controller: 'CategoryCtrl',
                     controllerAs: 'cc'
                 })
 
                 // Single story page
-                .when(URLS.story, {
+                .when(ROUTES.story, {
                     templateUrl: TEMPLATES.story,
                     controller: 'StoryCtrl',
                     controllerAs: 'sc'
@@ -54,7 +57,7 @@
 
                 // Redirect to the home page if it's an unrecognized url
                 .otherwise({
-                    redirectTo: URLS.home
+                    redirectTo: ROUTES.home
                 });
         }])
 

@@ -4,17 +4,21 @@
     angular.module('skribblez')
         .factory('SkribblezApiService', [
             'Restangular',
+            'API_URL',
+            'ModelBuilderService',
             SkribblezApiService
         ]);
 
-    function SkribblezApiService(Restangular) {
-
-        // @todo -- this needs be in a config
-        var baseUrl = 'http://api-local.skribblez.com:8380/';
+    /**
+     * Service to interface with the API, using Restangular
+     *
+     * @return object
+     */
+    function SkribblezApiService(Restangular, API_URL, ModelBuilderService) {
 
         // the Restangular object
         var ra = Restangular.withConfig(function (RestangularConfigurer) {
-            RestangularConfigurer.setBaseUrl(baseUrl);
+            RestangularConfigurer.setBaseUrl(API_URL);
         });
 
         // the object to be returned
@@ -26,6 +30,7 @@
         api.getChapterPath = getChapterPath;
         api.getChapterComments = getChapterComments;
 
+        api.postStarter = postStarter;
 
         /**
          * GET starter stories
@@ -34,10 +39,10 @@
          */
         function getStarters() {
             return ra.one('starters').get().then(function(data) {
-
-                // @todo -- create model
-
-                return data.plain();
+                var starters = ModelBuilderService.build('Chapter', data.plain().starters);
+                return {
+                    starters: starters
+                };
             });
         }
 
@@ -50,6 +55,7 @@
             return ra.one('chapter', guid).get().then(function(data) {
 
                 // @todo -- create model
+                console.log('getChapter', data.plain());
 
                 return data.plain();
             });
@@ -80,6 +86,26 @@
                 // @todo -- create model
 
                 return data.plain();
+            });
+        }
+
+        /**
+         * POST a new starter (chapter)
+         *
+         * @return promise
+         */
+        function postStarter(title, body) {
+            var data = {
+                author: 'author5',    // @todo -- remove  this and handle authorization correctly
+                title: title,
+                body: body
+            };
+
+            return ra.service('starter').post(data).then(function(newData) {
+
+                // @todo -- create model
+
+                return newData.plain();
             });
         }
 
