@@ -2,13 +2,13 @@
     'use strict';
 
     angular.module('skribblez')
-        .factory('ModelBuilderService', [
+        .factory('SkribblezApiModelBuilderService', [
             'ModelCacheService',
             'UserModel',
             'ChapterModel',
             'CommentModel',
             'RatingModel',
-            ModelBuilderService
+            SkribblezApiModelBuilderService
         ]);
 
     /**
@@ -16,7 +16,7 @@
      *
      * @return object
      */
-    function ModelBuilderService(ModelCacheService, UserModel, ChapterModel, CommentModel, RatingModel) {
+    function SkribblezApiModelBuilderService(ModelCacheService, UserModel, ChapterModel, CommentModel, RatingModel) {
 
         /*
          * Object for storing each model class, as well as custom mappings for response values that should
@@ -82,7 +82,7 @@
                     return buildModel(classKey, data);
                 }
             } else {
-                console.log('ModelBuilderService.build: no modelConfig object found with name "'+ classKey +'"');
+                console.log('SkribblezApiModelBuilderService.build: no modelConfig object found with name "'+ classKey +'"');
             }
         }
 
@@ -148,11 +148,14 @@
 
             model.postProcess();
 
-            // @todo -- move caching to the API service
-            var id = model.get('guid');
-            ModelCacheService.store(classKey, id, model);
+            return model;
 
-            return ModelCacheService.retrieve(classKey, id);;
+            // @todo -- move caching to the API service
+
+//            var id = model.get('guid');
+//            ModelCacheService.store(classKey, id, model);
+//
+//            return ModelCacheService.retrieve(classKey, id);;
         }
 
         /**

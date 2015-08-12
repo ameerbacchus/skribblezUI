@@ -5,7 +5,7 @@
         .factory('SkribblezApiService', [
             'Restangular',
             'API_URL',
-            'ModelBuilderService',
+            'SkribblezApiModelBuilderService',
             SkribblezApiService
         ]);
 
@@ -14,7 +14,10 @@
      *
      * @return object
      */
-    function SkribblezApiService(Restangular, API_URL, ModelBuilderService) {
+    function SkribblezApiService(Restangular, API_URL, SkribblezApiModelBuilderService) {
+
+        // SkribblezApiModelBuilderService
+        var MB = SkribblezApiModelBuilderService;
 
         // the Restangular object
         var ra = Restangular.withConfig(function (RestangularConfigurer) {
@@ -39,7 +42,7 @@
          */
         function getStarters() {
             return ra.one('starters').get().then(function(data) {
-                var starters = ModelBuilderService.build('Chapter', data.plain().starters);
+                var starters = MB.build('Chapter', data.plain().starters);
                 return starters;
             });
         }
@@ -52,11 +55,11 @@
         function getChapter(guid) {
             return ra.one('chapter', guid).get().then(function(data) {
                 var rawData = data.plain(),
-                    chapter = ModelBuilderService.build('Chapter', rawData.chapter),
-                    nextChapters = ModelBuilderService.build('Chapter', rawData.next),
-                    comments = ModelBuilderService.build('Comment', rawData.comments),
+                    chapter = MB.build('Chapter', rawData.chapter),
+                    nextChapters = MB.build('Chapter', rawData.next),
+                    comments = MB.build('Comment', rawData.comments),
                     rating = rawData.rating,
-                    userRating = ModelBuilderService.build('Rating', rawData.userRating);
+                    userRating = MB.build('Rating', rawData.userRating);
 
                 chapter
                     .set('next', nextChapters)
@@ -75,7 +78,7 @@
          */
         function getChapterPath(guid) {
             return ra.one('chapter', guid).one('path').get().then(function(data) {
-                var chapters = ModelBuilderService.build('Chapter', data.plain().path);
+                var chapters = MB.build('Chapter', data.plain().path);
                 return chapters;
             });
         }
@@ -87,7 +90,7 @@
          */
         function getChapterComments(guid) {
             return ra.one('chapter', guid).one('comments').get().then(function(data) {
-                var comments = ModelBuilderService.build('Comment', data.plain().comments);
+                var comments = MB.build('Comment', data.plain().comments);
                 return comments;
             });
         }
@@ -105,7 +108,7 @@
             };
 
             return ra.service('starter').post(data).then(function(newData) {
-                var starter = ModelBuilderService.build('Chapter', newData.plain().starter);
+                var starter = MB.build('Chapter', newData.plain().starter);
                 return starter;
             });
         }
