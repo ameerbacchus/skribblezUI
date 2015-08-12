@@ -1,1 +1,47 @@
-story
+<div id="story-view">
+    <h2 ng-bind="sc.storyTitle"></h2>
+
+    <div class="prev-level" ng-if="sc.chapter.prev">
+        <h3>
+            <a href="" ng-click="sc.goToChapter(sc.chapter.prev.guid)">
+                Go back to Chapter <span ng-bind="sc.chapter.prev.sequence"></span>
+            </a>
+        </h3>
+    </div>
+
+    <div class="current-level">
+        <h3>
+            Chapter <span ng-bind="sc.chapter.sequence"></span>
+        </h3>
+
+        <div class="sequence">
+            <div class="left-sibling" ng-if="sc.sequence.left">
+                <p ng-bind="sc.sequence.left.body"></p>
+            </div>
+
+            <div class="current-chapter">
+                <div class="author">
+                    Author:
+                    <span ng-bind="sc.chapter.author.fullName"></span>
+                </div>
+                <p ng-bind="sc.chapter.body"></p>
+            </div>
+
+            <div class="right-sibling" ng-if="sc.sequence.right">
+                <p ng-bind="sc.sequence.right.body"></p>
+            </div>
+        </div>
+    </div>
+
+    <ul class="next-level" ng-if="sc.chapter.next.length > 0">
+        <h3>Read on...</h3>
+        <li ng-repeat="nextChapter in sc.chapter.next">
+            <h4>
+                <a href="" ng-click="sc.goToChapter(nextChapter.guid)">
+                    Chapter <span ng-bind="nextChapter.sequence"></span>
+                </a>
+            </h4>
+            <p ng-bind="nextChapter.body"></p>
+        </li>
+    </ul>
+</div>

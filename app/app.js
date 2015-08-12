@@ -16,7 +16,7 @@
             home: '/',
             explore: '/explore',
             category: '/category/:categoryId',
-            story: '/story/:storyId'
+            story: '/story/:chapterId'
         })
 
         // Template paths

@@ -148,6 +148,7 @@
 
             model.postProcess();
 
+            // @todo -- move caching to the API service
             var id = model.get('guid');
             ModelCacheService.store(classKey, id, model);
 

@@ -40,9 +40,7 @@
         function getStarters() {
             return ra.one('starters').get().then(function(data) {
                 var starters = ModelBuilderService.build('Chapter', data.plain().starters);
-                return {
-                    starters: starters
-                };
+                return starters;
             });
         }
 
@@ -77,10 +75,8 @@
          */
         function getChapterPath(guid) {
             return ra.one('chapter', guid).one('path').get().then(function(data) {
-
-                // @todo -- create model
-
-                return data.plain();
+                var chapters = ModelBuilderService.build('Chapter', data.plain().path);
+                return chapters;
             });
         }
 
@@ -91,10 +87,8 @@
          */
         function getChapterComments(guid) {
             return ra.one('chapter', guid).one('comments').get().then(function(data) {
-
-                // @todo -- create model
-
-                return data.plain();
+                var comments = ModelBuilderService.build('Comment', data.plain().comments);
+                return comments;
             });
         }
 
@@ -111,10 +105,8 @@
             };
 
             return ra.service('starter').post(data).then(function(newData) {
-
-                // @todo -- create model
-
-                return newData.plain();
+                var starter = ModelBuilderService.build('Chapter', newData.plain().starter);
+                return starter;
             });
         }
 
