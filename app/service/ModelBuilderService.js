@@ -82,7 +82,7 @@
                     return buildModel(classKey, data);
                 }
             } else {
-                console.log('ModelBuilderService.build: no model class found with name "'+ classKey +'"');
+                console.log('ModelBuilderService.build: no modelConfig object found with name "'+ classKey +'"');
             }
         }
 
