@@ -3,6 +3,7 @@
 
     angular.module('skribblez')
         .factory('ModelBuilderService', [
+            'ModelCacheService',
             'UserModel',
             'ChapterModel',
             'CommentModel',
@@ -15,7 +16,7 @@
      *
      * @return object
      */
-    function ModelBuilderService(UserModel, ChapterModel, CommentModel, RatingModel) {
+    function ModelBuilderService(ModelCacheService, UserModel, ChapterModel, CommentModel, RatingModel) {
 
         /*
          * Object for storing each model class, as well as custom mappings for response values that should
@@ -125,8 +126,6 @@
 
             data = cleanDataObj(data);
 
-            // @todo -- implement in-memory caching of models to prevent creation of duplicate objects in memory
-
             /*
              * Loop through the data object and set values on the model
              */
@@ -149,7 +148,10 @@
 
             model.postProcess();
 
-            return model;
+            var id = model.get('guid');
+            ModelCacheService.store(classKey, id, model);
+
+            return ModelCacheService.retrieve(classKey, id);;
         }
 
         /**
