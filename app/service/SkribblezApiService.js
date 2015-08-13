@@ -38,6 +38,7 @@
         api.patchChapter = patchChapter;
         api.postComment = postComment;
         api.patchComment = patchComment;
+        api.deleteComment = deleteComment;
         api.postRating = postRating;
         api.patchRating = patchRating;
 
@@ -214,6 +215,18 @@
                 // @todo -- update in chapter object (in cache, when caching is in place)
 
                 return comment;
+            });
+        }
+
+        /**
+         * DELETE a comment
+         *
+         * @param string commentId
+         * @return promise
+         */
+        function deleteComment(commentId) {
+            return ra.service('comment').one(commentId).customDELETE().then(function() {
+                // @todo -- remove comment from chapter comments
             });
         }
 
