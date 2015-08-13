@@ -11,7 +11,6 @@
     /**
      * StoryChapterFormCtrl
      * Controller for the 'skStoryChapterForm' directive
-     *
      */
     function StoryChapterFormCtrl($scope, SkribblezApiService) {
 

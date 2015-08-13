@@ -35,6 +35,8 @@
 
         api.postStarter = postStarter;
         api.postChapter = postChapter;
+        api.postComment = postComment;
+        api.postRating = postRating;
 
 
         /**
@@ -111,6 +113,9 @@
 
             return ra.service('starter').post(data).then(function(newData) {
                 var starter = MB.build('Chapter', newData.plain().starter);
+
+                // @todo -- cache insert (when caching is in place)
+
                 return starter;
             });
         }
@@ -119,6 +124,7 @@
          * POST a new chapter
          *
          * @param string prevChapterId
+         * @param string body
          * @return promise
          */
         function postChapter(prevChapterId, body) {
@@ -129,8 +135,42 @@
 
             return ra.service('chapter').one(prevChapterId).customPOST(data).then(function(newData) {
                 var chapter = MB.build('Chapter', newData.plain().chapter);
+
+                // @todo -- cache insert (when caching is in place)
+
                 return chapter;
             });
+        }
+
+        /**
+         * POST a new comment
+         *
+         * @param string chapterId
+         * @param string body
+         */
+        function postComment(chapterId, body) {
+            var data = {
+                body: body,
+                user: 'author2'
+            };
+
+            return ra.service('chapter').one(chapterId).customPOST(data, 'comment').then(function(newData) {
+                var comment = MB.build('Comment', newData.plain().comment);
+
+                // @todo -- cache insert (when caching is in place)
+
+                return comment;
+            });
+        }
+
+        /**
+         * POST a new rating
+         *
+         * @param string chapterId
+         * @param number score
+         */
+        function postRating(chapterId, score) {
+            // @todo
         }
 
 

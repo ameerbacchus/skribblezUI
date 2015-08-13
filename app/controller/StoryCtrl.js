@@ -43,8 +43,9 @@
 
         // event handlers
         $scope.$on('chapter:created', function(evt, newChapter) {
-            console.log('chapter:created', arguments);
             loadData(newChapter.guid);
+
+            // @todo -- need to display a notification
         });
 
         // kick-off

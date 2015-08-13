@@ -62,13 +62,18 @@
 //        });
 
 //        // POST a new starter (1st chapter)
-//        api.postStarter('wednesday title', 'wednesday body').then(function(newStarter) {
+//        api.postStarter('late night post', 'late night post body').then(function(newStarter) {
 //            console.log('newStarter', newStarter);
 //        });
 
 //        // POST a new chapter
-//        api.postChapter(chapterGuid, 'chapter response body').then(function(newChapter) {
+//        api.postChapter(chapterGuid, 'late night response body').then(function(newChapter) {
 //            console.log('newChapter', newChapter);
+//        });
+
+//        // POST a new comment
+//        api.postComment(chapterGuid, 'another API test comment').then(function(newComment) {
+//            console.log('home new comment', newComment);
 //        });
     };
 
