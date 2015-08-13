@@ -37,6 +37,7 @@
         api.postChapter = postChapter;
         api.postComment = postComment;
         api.postRating = postRating;
+        api.patchRating = patchRating;
 
 
         /**
@@ -54,6 +55,7 @@
         /**
          * GET a single chapter
          *
+         * @param string guid
          * @return Promise
          */
         function getChapter(guid) {
@@ -78,6 +80,7 @@
         /**
          * GET a chapters hierarchal path
          *
+         * @param string guid
          * @return Promise
          */
         function getChapterPath(guid) {
@@ -90,6 +93,7 @@
         /**
          * GET chapter comments
          *
+         * @param string guid
          * @return promise
          */
         function getChapterComments(guid) {
@@ -102,6 +106,8 @@
         /**
          * POST a new starter (chapter)
          *
+         * @param string title
+         * @param string body
          * @return promise
          */
         function postStarter(title, body) {
@@ -147,11 +153,12 @@
          *
          * @param string chapterId
          * @param string body
+         * @return promise
          */
         function postComment(chapterId, body) {
             var data = {
                 body: body,
-                user: 'author2'
+                user: 'author2'            // @todo -- remove  this and handle authorization correctly
             };
 
             return ra.service('chapter').one(chapterId).customPOST(data, 'comment').then(function(newData) {
@@ -168,9 +175,43 @@
          *
          * @param string chapterId
          * @param number score
+         * @return promise
          */
         function postRating(chapterId, score) {
-            // @todo
+            var data = {
+                score: score,
+                user: 'author4'            // @todo -- remove  this and handle authorization correctly
+            };
+
+            return ra.service('chapter').one(chapterId).customPOST(data, 'rating').then(function(newData) {
+                var rating = MB.build('Rating', newData.plain().rating);
+
+                // @todo -- insert into chapter object (in cache, when caching is in place)
+
+                return rating;
+            });
+        }
+
+        /**
+         * PATCH a rating
+         *
+         * @param string ratingId
+         * @param number score
+         * @return promise
+         */
+        function patchRating(ratingId, score) {
+            var data = {
+                score: score,
+                user: 'author4'            // @todo -- remove  this and handle authorization correctly
+            };
+
+            return ra.service('rating').one(ratingId).patch(data).then(function(data) {
+                var rating = MB.build('Rating', data.plain().rating);
+
+                // @todo -- update in chapter object (in cache, when caching is in place)
+
+                return rating;
+            });
         }
 
 
