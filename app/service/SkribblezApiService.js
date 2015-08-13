@@ -35,6 +35,7 @@
 
         api.postStarter = postStarter;
         api.postChapter = postChapter;
+        api.patchChapter = patchChapter;
         api.postComment = postComment;
         api.patchComment = patchComment;
         api.postRating = postRating;
@@ -144,6 +145,29 @@
                 var chapter = MB.build('Chapter', newData.plain().chapter);
 
                 // @todo -- cache insert (when caching is in place)
+
+                return chapter;
+            });
+        }
+
+        /**
+         * PATCH a chapter
+         *
+         * @param string chapterId
+         * @param string body
+         * @return promise
+         */
+        function patchChapter(chapterId, body, title) {
+            var data = {
+                author: 'author1',        // @todo -- remove  this and handle authorization correctly
+                body: body,
+                title: title
+            };
+
+            return ra.service('chapter').one(chapterId).patch(data).then(function(data) {
+                var chapter = MB.build('Chapter', data.plain().chapter);
+
+                // @todo -- cache update (when caching is in place)
 
                 return chapter;
             });

@@ -43,8 +43,9 @@
      */
     HomeCtrl.prototype.testApi = function(api) {
 //        var chapterGuid = '{E4CA4CD0-7B48-4503-BEC2-D1C01CA1EB91}';        // use for ChapterPath
-        var chapterGuid = '{1CB01884-2BBF-40B7-9354-121770B91865}';
+//        var chapterGuid = '{1CB01884-2BBF-40B7-9354-121770B91865}';
 //        var chapterGuid = '{7E11B3C4-9488-427D-98B6-1AB94B072D6B}';
+        var chapterGuid = '{76FDDDE8-334E-448D-AA79-407815009C27}';        // starter
 
         var ratingGuid = '{9754B194-CE25-47A6-AE10-B45D2D54DA75}';
         var commentGuid = '{045E713C-191A-4281-AAAE-5E0C921CA8C2}';
@@ -72,6 +73,11 @@
 //        // POST a new chapter
 //        api.postChapter(chapterGuid, 'late night response body').then(function(newChapter) {
 //            console.log('newChapter', newChapter);
+//        });
+
+//        // PATCH a chapter
+//        api.patchChapter(chapterGuid, 'Re-update chapter body', 'Entourage Movie update').then(function(chapter) {
+//            console.log('home updated chapter', chapter);
 //        });
 
 //        // POST a new comment
