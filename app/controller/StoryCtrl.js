@@ -26,6 +26,7 @@
         vm.chapterLoaded = false;
         vm.sequence = null;
         vm.nextSequence = null;
+        vm.nextChapterId = null;
         vm.showForm = {
             nextSequence: false,
             currentSequence: false
@@ -59,8 +60,9 @@
         });
 
         // next level sequence nav
-        $scope.$on('nextSequenceNav:navigate', function(evt, chapter) {
-            console.log('nextSequenceNav:navigate', chapter);
+        $scope.$on('nextSequenceNav:navigate', function(evt, sequenceChapter) {
+            vm.nextChapterId = sequenceChapter.guid;
+            vm.nextSequence = getSequenceData(vm.chapter.next, sequenceChapter);
         });
 
         // kick-off
@@ -80,6 +82,12 @@
                     getSiblings(chapter);
                 } else {
                     vm.sequence = getSequenceData([]);
+                }
+
+                if (chapter.next.length > 0) {
+                    var nextChapter = chapter.next[0];
+                    vm.nextChapterId = nextChapter.guid;
+                    vm.nextSequence = getSequenceData(chapter.next, nextChapter);
                 }
 
                 vm.chapter = chapter;

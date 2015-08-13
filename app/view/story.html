@@ -43,25 +43,7 @@
                         <a href="" ng-hide="sc.chapter.sequence === 1" ng-click="sc.toggleForm('currentSequence')">Rewrite these lines</a>
                     </div>
                 </div>
-                <div ng-if="sc.sequence">
-                    <sk-story-sequence-nav sequence-data="sc.sequence" namespace="sequenceNav" ng-if="sc.sequence"></sk-story-sequence-nav>
-                </div>
-                <!-- <div class="sequence-nav">
-                    <div class="nav-arrows">
-                        <a href="" ng-click="sc.goToChapter($event, sc.sequence.left.guid)" ng-disabled="sc.sequence.position === 1">
-                            <i>&lt;</i>
-                        </a>
-
-                        <span ng-bind="sc.sequence.position"></span>
-                        of
-                        <span ng-bind="sc.sequence.count"></span>
-
-                        <a href="" ng-click="sc.goToChapter($event, sc.sequence.right.guid)" ng-disabled="sc.sequence.position === sc.sequence.count">
-                            <i>&gt;</i>
-                        </a>
-                    </div>
-                    <div class="sequence-number" ng-bind="sc.chapter.sequence"></div>
-                </div> -->
+                <sk-story-sequence-nav sequence-data="sc.sequence" namespace="sequenceNav"></sk-story-sequence-nav>
             </div>
         </div>
 
@@ -79,7 +61,7 @@
                 <div ng-if="sc.chapter.next.length > 0">
                     <h3>Read on...</h3>
                     <ul class="next-chapters">
-                        <li ng-repeat="nextChapter in sc.chapter.next">
+                        <li ng-repeat="nextChapter in sc.chapter.next" ng-hide="nextChapter.guid !== sc.nextChapterId">
                             <h4>
                                 <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
                                     Chapter <span ng-bind="nextChapter.sequence"></span>
@@ -88,6 +70,7 @@
                             <p ng-bind="nextChapter.body"></p>
                         </li>
                     </ul>
+                    <sk-story-sequence-nav sequence-data="sc.nextSequence" namespace="nextSequenceNav"></sk-story-sequence-nav>
                 </div>
 
                 <button ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</button>
