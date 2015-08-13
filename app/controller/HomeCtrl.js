@@ -47,6 +47,7 @@
 //        var chapterGuid = '{7E11B3C4-9488-427D-98B6-1AB94B072D6B}';
 
         var ratingGuid = '{9754B194-CE25-47A6-AE10-B45D2D54DA75}';
+        var commentGuid = '{045E713C-191A-4281-AAAE-5E0C921CA8C2}';
 
 //        // GET single chapter
 //        api.getChapter(chapterGuid).then(function(chapter) {
@@ -76,6 +77,11 @@
 //        // POST a new comment
 //        api.postComment(chapterGuid, 'another API test comment').then(function(newComment) {
 //            console.log('home new comment', newComment);
+//        });
+
+//        // PATCH a comment
+//        api.patchComment(commentGuid, 'updating this comment').then(function(comment) {
+//            console.log('home updated comment', comment);
 //        });
 
 //        // POST a new rating
