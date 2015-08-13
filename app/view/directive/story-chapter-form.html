@@ -1,0 +1,9 @@
+<a href="" ng-click="scfc.toggleForm()">Write the next chapter!</a>
+
+<form name="chapterForm" novalidate ng-submit="chapterForm.$valid && scfc.submitForm(chapterForm)" ng-show="scfc.showForm">
+    <label for="">Body</label>
+    <textarea name="body" placeholder="Write the next chapter..." required="required" ng-model="scfc.form.body"></textarea>
+    <div ng-show="(chapterForm.$submitted || !chapterForm.body.$pristine) && chapterForm.body.$error.required" class="formError">Please enter a body for the new chapter</div>
+
+    <button type="submit">Publish</button>
+</form>

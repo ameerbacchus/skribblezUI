@@ -2,9 +2,11 @@
     <div class="starters">
         <h3>Starters</h3>
         <div ng-repeat="starter in hc.starters">
-            <!-- todo create directive for this -->
-            <h4 ng-bind="starter.title"></h4>
-            <p ng-bind="starter.body"></p>
+            <a ng-href="/#/story/{{starter.guid}}">        <!-- @todo -- we don't want to hardcode the url here -->
+                <!-- todo create directive for this -->
+                <h4 ng-bind="starter.title"></h4>
+                <p ng-bind="starter.body"></p>
+            </a>
         </div>
     </div>
 </div>

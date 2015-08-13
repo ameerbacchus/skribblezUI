@@ -34,6 +34,8 @@
         api.getChapterComments = getChapterComments;
 
         api.postStarter = postStarter;
+        api.postChapter = postChapter;
+
 
         /**
          * GET starter stories
@@ -110,6 +112,24 @@
             return ra.service('starter').post(data).then(function(newData) {
                 var starter = MB.build('Chapter', newData.plain().starter);
                 return starter;
+            });
+        }
+
+        /**
+         * POST a new chapter
+         *
+         * @param string prevChapterId
+         * @return promise
+         */
+        function postChapter(prevChapterId, body) {
+            var data = {
+                author: 'author1',        // @todo -- remove  this and handle authorization correctly
+                body: body
+            };
+
+            return ra.service('chapter').one(prevChapterId).customPOST(data).then(function(newData) {
+                var chapter = MB.build('Chapter', newData.plain().chapter);
+                return chapter;
             });
         }
 

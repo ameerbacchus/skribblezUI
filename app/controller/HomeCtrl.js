@@ -65,6 +65,11 @@
 //        api.postStarter('wednesday title', 'wednesday body').then(function(newStarter) {
 //            console.log('newStarter', newStarter);
 //        });
+
+//        // POST a new chapter
+//        api.postChapter(chapterGuid, 'chapter response body').then(function(newChapter) {
+//            console.log('newChapter', newChapter);
+//        });
     };
 
 })();

@@ -67,22 +67,30 @@
         </div>
     </div>
 
-    <ul class="next-level">
+    <div class="next-level">
         <div class="flex-row">
             <div class="side-col"></div>
             <div class="primary-col">
-                <h3>Read on...</h3>
-                <li ng-repeat="nextChapter in sc.chapter.next">
-                    <h4>
-                        <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
-                            Chapter <span ng-bind="nextChapter.sequence"></span>
-                        </a>
-                    </h4>
-                    <p ng-bind="nextChapter.body"></p>
-                </li>
+                <div ng-if="sc.chapter.next.length > 0">
+                    <h3>Read on...</h3>
+                    <ul class="next-chapters">
+                        <li ng-repeat="nextChapter in sc.chapter.next">
+                            <h4>
+                                <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
+                                    Chapter <span ng-bind="nextChapter.sequence"></span>
+                                </a>
+                            </h4>
+                            <p ng-bind="nextChapter.body"></p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div ng-if="sc.chapter.next.length === 0">
+                    <sk-story-chapter-form chapter-id="sc.chapter.guid"></sk-story-chapter-form>
+                </div>
             </div>
             <div class="side-col"></div>
         </div>
-    </ul>
+    </div>
 
 </div>

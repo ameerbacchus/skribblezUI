@@ -5,6 +5,7 @@
         .controller('StoryCtrl', [
             '$routeParams',
             '$location',
+            '$scope',
             'ROUTES',
             'UtilService',
             'SkribblezApiService',
@@ -14,7 +15,7 @@
     /**
      * StoryCtrl
      */
-    function StoryCtrl($routeParams, $location, ROUTES, UtilService, SkribblezApiService) {
+    function StoryCtrl($routeParams, $location, $scope, ROUTES, UtilService, SkribblezApiService) {
 
         // assign 'this' to a var so we always have a simple reference to it
         var vm = this;
@@ -40,21 +41,47 @@
         // the story id for this view
         var chapterId = $routeParams.chapterId;
 
-        // request chapter
-        Api.getChapter(chapterId).then(function(chapter) {
-            var storyTitle = chapter.title;
-            if (chapter.parent) {
-                storyTitle = chapter.parent.title;
-            }
-
-            if (chapter.prev) {
-                getSiblings(chapter);
-            }
-
-            vm.chapter = chapter;
-            vm.storyTitle = storyTitle;
-            vm.chapterLoaded = true;
+        // event handlers
+        $scope.$on('chapter:created', function(evt, newChapter) {
+            console.log('chapter:created', arguments);
+            loadData(newChapter.guid);
         });
+
+        // kick-off
+        loadData(chapterId);
+
+        /**
+         * Request a chapter with the given id and assign values to the view scope
+         */
+        function loadData(chapterId) {
+            Api.getChapter(chapterId).then(function(chapter) {
+                var storyTitle = chapter.title;
+                if (chapter.parent) {
+                    storyTitle = chapter.parent.title;
+                }
+
+                if (chapter.prev) {
+                    getSiblings(chapter);
+                }
+
+                vm.chapter = chapter;
+                vm.storyTitle = storyTitle;
+
+                if (vm.chapterLoaded) {
+                    /*
+                     * @todo -- figure out transitioning between chapters
+                     * cases:
+                     * 1) transitioning "up" to previous chapter
+                     * 2) transitioning "down" to next chapter
+                     * 3) transitioning "left/right" to alternate chapter
+                     */
+                } else {
+                    // @todo -- transition in the page
+                }
+
+                vm.chapterLoaded = true;
+            });
+        }
 
         /**
          * Finds the siblings chapters of the given chapter.
@@ -108,11 +135,15 @@
             var $target = $(evt.currentTarget);
 
             if (!$target.attr('disabled')) {
-                var url = Utils.buildUrl(ROUTES.story, {
-                    chapterId: chapterId
-                });
+                loadData(chapterId);
 
-                $location.path(url);
+                // @todo -- figure out how to change the url without causing a view refresh
+
+//                var url = Utils.buildUrl(ROUTES.story, {
+//                    chapterId: chapterId
+//                });
+//
+//                $location.path(url);
             }
         };
 
