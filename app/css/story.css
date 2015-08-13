@@ -68,10 +68,10 @@
     padding: 0 20%;
 }
 
-#story-view .chapter-nav {
+#story-view .sequence-nav {
     border-top: 1px solid #ddd;
 }
 
-#story-view .chapter-nav .nav-arrows {
+#story-view .sequence-nav .nav-arrows {
     float: right;
 }

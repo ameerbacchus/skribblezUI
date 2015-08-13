@@ -7,11 +7,10 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: Quicksand, Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     width: 100%;
     height: 100%;
 }
-
 
 /* Links */
 a {
@@ -28,7 +27,10 @@ a[disabled] {
 /* Forms */
 form {}
 fieldset {}
-input, select, textarea, button {}
+input, select, textarea, button {
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
 input[type="input"], input[type="password"] {}
 input[type="input"] {}
 input[type="password"] {}
@@ -37,9 +39,35 @@ input[type="radio"] {}
 input[type="checkbox"] {}
 select {}
 textarea {}
-input[type="submit"], button {}
-input[type="submit"]:hover, input[type="submit"]:focus, button:hover, button:focus {}
-input[type="submit"]:active, button:active {}
+input[type="submit"], button {
+    border: 2px solid #302b2b;
+    color: #302b2b;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 0.75em 4em;
+    display: inline-block;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+
+    transition: background-color 100ms ease-in;
+}
+input[type="submit"]:hover, button:hover {
+    background-color: #63d4f7;
+}
+input[type="submit"]:focus, button:focus {
+    outline-width: 0;    /* override browser focus outline */
+}
+input[type="submit"]:active, button:active {
+    background-color: #00aeef;
+}
+input[type="submit"][disabled], button[disabled] {
+    background-color: #eee;
+    border-color: #ccc;
+    color: #ccc;
+    font-weight: normal;
+    cursor: default;
+}
 label {}
 
 
@@ -75,6 +103,7 @@ li {
 }
 
 #skribblez {
+    /* font-size: 1.5em; */ /* @todo -- remove this; it's just here for testing before serious styling begins */
     display: flex;
     flex-direction: column;
     height: 100%;

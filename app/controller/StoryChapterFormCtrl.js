@@ -23,26 +23,15 @@
         var Api = SkribblezApiService;
 
         // view properties
-        vm.showForm = false;
         vm.form = {
             body: ''
         };
 
         // view functions
-        vm.toggleForm = toggleForm;
         vm.submitForm = submitForm;
 
         /**
-         * Toggles the showForm property
-         */
-        function toggleForm() {
-            vm.showForm = !vm.showForm;
-        }
-
-        /**
          * Submit the form
-         *
-         * @todo -- fire event to bubble up
          *
          * @param chapterForm
          */
@@ -54,10 +43,9 @@
                 // reset and hide form
                 vm.form.body = '';
                 chapterForm.$setPristine();
-                toggleForm();
 
                 // fire event
-                $scope.$emit('chapter:created', newChapter);
+                $scope.$emit('storyChapterForm:chapterCreated', newChapter);
             });
         }
 

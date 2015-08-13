@@ -39,9 +39,11 @@
                     </div>
                     <div class="controls">
                         @todo -- controls
+                        <a href="" ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</a>
+                        <a href="" ng-hide="sc.chapter.sequence === 1" ng-click="sc.toggleForm('currentSequence')">Rewrite these lines</a>
                     </div>
                 </div>
-                <div class="chapter-nav">
+                <div class="sequence-nav">
                     <div class="nav-arrows">
                         <a href="" ng-click="sc.goToChapter($event, sc.sequence.left.guid)" ng-disabled="sc.sequence.position === 1">
                             <i>&lt;</i>
@@ -85,11 +87,19 @@
                     </ul>
                 </div>
 
-                <div ng-if="sc.chapter.next.length === 0">
-                    <sk-story-chapter-form chapter-id="sc.chapter.guid"></sk-story-chapter-form>
-                </div>
+                <button ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</button>
             </div>
             <div class="side-col"></div>
+        </div>
+    </div>
+
+    <div class="modals">
+        <div ng-if="sc.chapter">
+            <div ng-show="sc.showForm.nextSequence">
+                <a href="" ng-click="sc.toggleForm('nextSequence', false)">[X]</a>
+                <h3>Add a few lines...</h3>
+                <sk-story-chapter-form chapter-id="{{sc.chapter.guid}}"></sk-story-chapter-form>
+            </div>
         </div>
     </div>
 

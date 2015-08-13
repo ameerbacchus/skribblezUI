@@ -24,15 +24,23 @@
         vm.chapter = null;
         vm.storyTitle = '';
         vm.chapterLoaded = false;
+//        vm.nextChapterId = null;
         vm.sequence = {
             left: null,
             right: null,
             position: 1,
             count: 1
         };
+//        vm.sequence = getSequenceData([]);
+//        vm.nextSequence = getSequenceData([]);
+        vm.showForm = {
+            nextSequence: false,
+            currentSequence: false
+        };
 
         // view functions
         vm.goToChapter = goToChapter;
+        vm.toggleForm = toggleForm;
 
         // Services
         var Utils = UtilService;
@@ -42,8 +50,12 @@
         var chapterId = $routeParams.chapterId;
 
         // event handlers
-        $scope.$on('chapter:created', function(evt, newChapter) {
+        $scope.$on('storyChapterForm:chapterCreated', function(evt, newChapter) {
             loadData(newChapter.guid);
+
+            for (var key in vm.showForm) {
+                vm.showForm[key] = false;
+            }
 
             // @todo -- need to display a notification
         });
@@ -93,36 +105,48 @@
          */
         function getSiblings(chapter) {
             Api.getChapter(chapter.prev.guid).then(function(prevChapter) {
-                var sequenceChapters = prevChapter.next,
-                    leftSibling = null,
-                    rightSibling = null,
-                    count = sequenceChapters.length,
-                    position = 1;
+                vm.sequence = getSequenceData(prevChapter.next, chapter.guid);
+            });
+        }
 
-                for (var i = 0; i < count; i++) {
-                    var chap = sequenceChapters[i];
-                    if (chapter.guid === chap.guid) {
-                        position = i + 1;
+        /**
+         * Gets sequence metaData given a sequence/array of chapters and the 'current' chapter id
+         *
+         * @param array<ChapterModel> sequenceChapters
+         * @param string currentId
+         * @return object
+         */
+        function getSequenceData(sequenceChapters, currentId) {
+            var leftSibling = null,
+                rightSibling = null,
+                count = sequenceChapters.length,
+                position = 1;
 
-                        if (i > 0) {
-                            leftSibling = sequenceChapters[i - 1];
-                        }
+            for (var i = 0; i < count; i++) {
+                var chap = sequenceChapters[i];
+                if (currentId === chap.guid) {
+                    position = i + 1;
 
-                        if (i < count - 1) {
-                            rightSibling = sequenceChapters[i + 1];
-                        }
+                    if (i > 0) {
+                        leftSibling = sequenceChapters[i - 1];
+                    }
 
-                        if (leftSibling && rightSibling) {
-                            break;
-                        }
+                    if (i < count - 1) {
+                        rightSibling = sequenceChapters[i + 1];
+                    }
+
+                    if (leftSibling && rightSibling) {
+                        break;
                     }
                 }
+            }
 
-                vm.sequence.left = leftSibling;
-                vm.sequence.right = rightSibling;
-                vm.sequence.position = position;
-                vm.sequence.count = count;
-            });
+            return {
+                left: leftSibling,
+                right: rightSibling,
+                position: position,
+                count: count
+            };
         }
 
         /**
@@ -147,6 +171,22 @@
 //                $location.path(url);
             }
         };
+
+        /**
+         * Toggle a flag in the showForm object
+         *
+         * @param string key
+         * @param boolean forceVal | optional
+         */
+        function toggleForm(key, forceVal) {
+            if (typeof vm.showForm[key] !== 'undefined') {
+                if (typeof forceVal !== 'undefined') {
+                    vm.showForm[key] = forceVal;
+                } else {
+                    vm.showForm[key] = !vm.showForm[key];
+                }
+            }
+        }
 
         console.log('StoryCtrl', vm);
     }

@@ -15,7 +15,7 @@
             templateUrl: '/view/directive/story-chapter-form.html',
             restrict: 'E',
             scope: {
-                chapterId: '='
+                chapterId: '@'
             },
             controller: 'StoryChapterFormCtrl',
             controllerAs: 'scfc'
