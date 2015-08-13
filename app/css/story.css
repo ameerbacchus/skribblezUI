@@ -2,7 +2,10 @@
  * Story view
  */
 #story-view {
+    flex: 1 0 auto;
 
+    display: flex;
+    flex-direction: column;
 }
 
 #story-view.loaded {
@@ -14,21 +17,20 @@
 
 }
 
-#story-view .flex-col {
-    display: flex;
-    flex-direction: column;
-}
-
 #story-view .prev-level {
-    flex: 40px 0 0;
+    /* flex: none; */
+    height: 40px;
 }
 
 #story-view .current-level {
-    flex: 100% 0 0
+    flex: 1 0 auto;
+    border: 2px dashed #ddd;
+    border-width: 2px 0;
 }
 
 #story-view .next-level {
-    flex: 100px 0 0;
+    /* flex: none; */
+    /* height: 100px; */
     /* overflow: hidden; */
 }
 
@@ -39,20 +41,31 @@
 
 #story-view .flex-row .side-col {
     flex: 1 0 0;
+    padding: 20px;
 }
 
-#story-view .primary-col {
+#story-view .flex-row .primary-col {
     flex: 4 0 0;
-}
-
-#story-view .sequence {
-    border: 2px dashed #ddd;
-    border-width: 2px 0;
+    padding: 20px;
 }
 
 #story-view .current-chapter {
-    /* display: flex;
-    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
+}
+
+#story-view .chapter-body {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    /* align-self: center;
+    padding: var(--space) var(--space) 0; */
+}
+
+#story-view .chapter-body > p {
+    flex: 1 0 auto;
+    align-self: center;
+    padding: 0 20%;
 }
 
 #story-view .chapter-nav {
