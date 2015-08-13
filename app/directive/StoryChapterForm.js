@@ -8,14 +8,16 @@
      * skStoryChapterForm directive
      */
     function skStoryChapterForm() {
-
-        // @todo -- should this be a modal?
-
         return {
             templateUrl: '/view/directive/story-chapter-form.html',
             restrict: 'E',
             scope: {
                 chapterId: '@'
+            },
+            link: function($scope) {
+                $scope.$watch('chapterId', function(newChapterId, oldChapterId) {
+                    $scope.scfc.chapterId = newChapterId;
+                });
             },
             controller: 'StoryChapterFormCtrl',
             controllerAs: 'scfc'

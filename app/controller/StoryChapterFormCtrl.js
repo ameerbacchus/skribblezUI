@@ -17,7 +17,7 @@
         // assign 'this' to a var so we always have a simple reference to it
         var vm = this;
 
-        var chapterId = $scope.chapterId;
+        vm.chapterId = $scope.chapterId;
 
         // Services
         var Api = SkribblezApiService;
@@ -38,7 +38,7 @@
         function submitForm(chapterForm) {
             var data = vm.form;
 
-            Api.postChapter(chapterId, data.body).then(function(newChapter) {
+            Api.postChapter(vm.chapterId, data.body).then(function(newChapter) {
 
                 // reset and hide form
                 vm.form.body = '';
