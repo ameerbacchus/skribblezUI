@@ -24,15 +24,8 @@
         vm.chapter = null;
         vm.storyTitle = '';
         vm.chapterLoaded = false;
-//        vm.nextChapterId = null;
-        vm.sequence = {
-            left: null,
-            right: null,
-            position: 1,
-            count: 1
-        };
-//        vm.sequence = getSequenceData([]);
-//        vm.nextSequence = getSequenceData([]);
+        vm.sequence = null;
+        vm.nextSequence = null;
         vm.showForm = {
             nextSequence: false,
             currentSequence: false
@@ -60,6 +53,16 @@
             // @todo -- need to display a notification
         });
 
+        // current level sequence nav
+        $scope.$on('sequenceNav:navigate', function(evt, chapter) {
+            loadData(chapter.guid);
+        });
+
+        // next level sequence nav
+        $scope.$on('nextSequenceNav:navigate', function(evt, chapter) {
+            console.log('nextSequenceNav:navigate', chapter);
+        });
+
         // kick-off
         loadData(chapterId);
 
@@ -75,6 +78,8 @@
 
                 if (chapter.prev) {
                     getSiblings(chapter);
+                } else {
+                    vm.sequence = getSequenceData([]);
                 }
 
                 vm.chapter = chapter;
@@ -105,7 +110,7 @@
          */
         function getSiblings(chapter) {
             Api.getChapter(chapter.prev.guid).then(function(prevChapter) {
-                vm.sequence = getSequenceData(prevChapter.next, chapter.guid);
+                vm.sequence = getSequenceData(prevChapter.next, chapter);
             });
         }
 
@@ -113,18 +118,19 @@
          * Gets sequence metaData given a sequence/array of chapters and the 'current' chapter id
          *
          * @param array<ChapterModel> sequenceChapters
-         * @param string currentId
+         * @param ChapterModel chapter
          * @return object
          */
-        function getSequenceData(sequenceChapters, currentId) {
+        function getSequenceData(sequenceChapters, chapter) {
             var leftSibling = null,
                 rightSibling = null,
+                level = chapter ? chapter.sequence : 1,
                 count = sequenceChapters.length,
                 position = 1;
 
             for (var i = 0; i < count; i++) {
                 var chap = sequenceChapters[i];
-                if (currentId === chap.guid) {
+                if (chapter.guid === chap.guid) {
                     position = i + 1;
 
                     if (i > 0) {
@@ -144,8 +150,9 @@
             return {
                 left: leftSibling,
                 right: rightSibling,
+                level: level,
                 position: position,
-                count: count
+                count: count || 1
             };
         }
 

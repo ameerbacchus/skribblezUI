@@ -1,0 +1,16 @@
+<div class="sequence-nav">
+    <div class="nav-arrows" ng-if="ssnc.sequence.count > 1">
+        <a href="" ng-click="ssnc.clickArrow($event, 'left')" ng-disabled="ssnc.sequence.position === 0 || ssnc.sequence.position === 1">
+            <i>&lt;</i>
+        </a>
+
+        <span ng-bind="ssnc.sequence.position"></span>
+        of
+        <span ng-bind="ssnc.sequence.count"></span>
+
+        <a href="" ng-click="ssnc.clickArrow($event, 'right')" ng-disabled="ssnc.sequence.position === ssnc.sequence.count">
+            <i>&gt;</i>
+        </a>
+    </div>
+    <div class="sequence-number" ng-bind="ssnc.sequence.level"></div>
+</div>

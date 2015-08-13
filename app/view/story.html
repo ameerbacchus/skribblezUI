@@ -43,7 +43,10 @@
                         <a href="" ng-hide="sc.chapter.sequence === 1" ng-click="sc.toggleForm('currentSequence')">Rewrite these lines</a>
                     </div>
                 </div>
-                <div class="sequence-nav">
+                <div ng-if="sc.sequence">
+                    <sk-story-sequence-nav sequence-data="sc.sequence" namespace="sequenceNav" ng-if="sc.sequence"></sk-story-sequence-nav>
+                </div>
+                <!-- <div class="sequence-nav">
                     <div class="nav-arrows">
                         <a href="" ng-click="sc.goToChapter($event, sc.sequence.left.guid)" ng-disabled="sc.sequence.position === 1">
                             <i>&lt;</i>
@@ -58,7 +61,7 @@
                         </a>
                     </div>
                     <div class="sequence-number" ng-bind="sc.chapter.sequence"></div>
-                </div>
+                </div> -->
             </div>
         </div>
 
