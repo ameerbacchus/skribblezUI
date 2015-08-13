@@ -11,12 +11,14 @@
     <link rel="icon" href="img/favico.png" />
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/shared.css" />
+    <link rel="stylesheet" href="/css/story.css" />
 
 <!-- /CSS -->
 
 
 <!-- JavaScript -->
     <!-- dependencies -->
+    <script type="text/javascript" src="_libs/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="_libs/angular/angular.min.js"></script>
     <script type="text/javascript" src="_libs/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="_libs/lodash/lodash.min.js"></script>
@@ -50,11 +52,13 @@
 
 <body>
 
-    <header>[Header]</header>
+    <div id="skribblez">
+        <header>[Header]</header>
 
-    <div ng-view></div>
+        <div id="page-content" ng-view></div>
 
-    <footer>[Footer]</footer>
+        <footer>[Footer]</footer>
+    </div>
 
 </body>
 </html>

@@ -1,0 +1,64 @@
+/**
+ * Story view
+ */
+#story-view {
+
+}
+
+#story-view.loaded {
+
+}
+
+
+#story-view .sibling {
+
+}
+
+#story-view .flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+#story-view .prev-level {
+    flex: 40px 0 0;
+}
+
+#story-view .current-level {
+    flex: 100% 0 0
+}
+
+#story-view .next-level {
+    flex: 100px 0 0;
+    /* overflow: hidden; */
+}
+
+#story-view .flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+#story-view .flex-row .side-col {
+    flex: 1 0 0;
+}
+
+#story-view .primary-col {
+    flex: 4 0 0;
+}
+
+#story-view .sequence {
+    border: 2px dashed #ddd;
+    border-width: 2px 0;
+}
+
+#story-view .current-chapter {
+    /* display: flex;
+    flex-direction: column; */
+}
+
+#story-view .chapter-nav {
+    border-top: 1px solid #ddd;
+}
+
+#story-view .chapter-nav .nav-arrows {
+    float: right;
+}

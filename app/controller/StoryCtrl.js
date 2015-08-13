@@ -22,6 +22,7 @@
         // view properties
         vm.chapter = null;
         vm.storyTitle = '';
+        vm.chapterLoaded = false;
         vm.sequence = {
             left: null,
             right: null,
@@ -52,6 +53,7 @@
 
             vm.chapter = chapter;
             vm.storyTitle = storyTitle;
+            vm.chapterLoaded = true;
         });
 
         /**
@@ -98,14 +100,20 @@
         /**
          * Redirects the view to another chapter
          *
+         * @param MouseEvent evt
          * @param string chapterId
          */
-        function goToChapter(chapterId) {
-            var url = Utils.buildUrl(ROUTES.story, {
-                chapterId: chapterId
-            });
+        function goToChapter(evt, chapterId) {
+            evt.preventDefault();
+            var $target = $(evt.currentTarget);
 
-            $location.path(url);
+            if (!$target.attr('disabled')) {
+                var url = Utils.buildUrl(ROUTES.story, {
+                    chapterId: chapterId
+                });
+
+                $location.path(url);
+            }
         };
 
         console.log('StoryCtrl', vm);

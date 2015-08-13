@@ -1,47 +1,91 @@
 <div id="story-view">
-    <h2 ng-bind="sc.storyTitle"></h2>
 
-    <div class="prev-level" ng-if="sc.chapter.prev">
-        <h3>
-            <a href="" ng-click="sc.goToChapter(sc.chapter.prev.guid)">
-                Go back to Chapter <span ng-bind="sc.chapter.prev.sequence"></span>
-            </a>
-        </h3>
-    </div>
+    <div class="flex-col">
 
-    <div class="current-level">
-        <h3>
-            Chapter <span ng-bind="sc.chapter.sequence"></span>
-        </h3>
+        <div class="prev-level" ng-if="sc.chapter.prev">
+            <h3>
+                <a href="" ng-click="sc.goToChapter($event, sc.chapter.prev.guid)">
+                    Go back to Chapter <span ng-bind="sc.chapter.prev.sequence"></span>
+                </a>
+            </h3>
+        </div>
 
-        <div class="sequence">
-            <div class="left-sibling" ng-if="sc.sequence.left">
-                <p ng-bind="sc.sequence.left.body"></p>
-            </div>
+        <div class="current-level">
 
-            <div class="current-chapter">
-                <div class="author">
-                    Author:
-                    <span ng-bind="sc.chapter.author.fullName"></span>
+            <div class="sequence flex-row">
+                <div class="sibling left-sibling side-col">
+                    <div ng-if="sc.sequence.left">
+                        <p ng-bind="sc.sequence.left.body"></p>
+                    </div>
                 </div>
-                <p ng-bind="sc.chapter.body"></p>
-            </div>
 
-            <div class="right-sibling" ng-if="sc.sequence.right">
-                <p ng-bind="sc.sequence.right.body"></p>
+                <div class="current-chapter primary-col">
+                    <h2 ng-bind="sc.storyTitle"></h2>
+
+                    <h3>
+                        Chapter <span ng-bind="sc.chapter.sequence"></span>
+                    </h3>
+
+                    <p ng-bind="sc.chapter.body"></p>
+
+                    <div class="chapter-footer">
+                        <div class="chapter-meta">
+                            <div class="author">
+                                Author:
+                                <span ng-bind="sc.chapter.author.fullName"></span>
+                            </div>
+                            <div class="social">
+                                @todo -- social network links
+                            </div>
+                            <div class="controls">
+                                @todo -- controls
+                            </div>
+                        </div>
+                        <div class="chapter-nav">
+                            <div class="nav-arrows">
+                                <a href="" ng-click="sc.goToChapter($event, sc.sequence.left.guid)" ng-disabled="sc.sequence.position === 1">
+                                    <i>&lt;</i>
+                                </a>
+
+                                <span ng-bind="sc.sequence.position"></span>
+                                of
+                                <span ng-bind="sc.sequence.count"></span>
+
+                                <a href="" ng-click="sc.goToChapter($event, sc.sequence.right.guid)" ng-disabled="sc.sequence.position === sc.sequence.count">
+                                    <i>&gt;</i>
+                                </a>
+                            </div>
+                            <div class="sequence-number" ng-bind="sc.chapter.sequence"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sibling right-sibling side-col">
+                    <div ng-if="sc.sequence.right">
+                        <p ng-bind="sc.sequence.right.body"></p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <ul class="next-level">
+            <div class="flex-row">
+                <div class="side-col"></div>
+                <div class="primary-col">
+                    <h3>Read on...</h3>
+                    <li ng-repeat="nextChapter in sc.chapter.next">
+                        <h4>
+                            <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
+                                Chapter <span ng-bind="nextChapter.sequence"></span>
+                            </a>
+                        </h4>
+                        <p ng-bind="nextChapter.body"></p>
+                    </li>
+                </div>
+                <div class="side-col"></div>
+            </div>
+        </ul>
+
     </div>
 
-    <ul class="next-level" ng-if="sc.chapter.next.length > 0">
-        <h3>Read on...</h3>
-        <li ng-repeat="nextChapter in sc.chapter.next">
-            <h4>
-                <a href="" ng-click="sc.goToChapter(nextChapter.guid)">
-                    Chapter <span ng-bind="nextChapter.sequence"></span>
-                </a>
-            </h4>
-            <p ng-bind="nextChapter.body"></p>
-        </li>
-    </ul>
 </div>

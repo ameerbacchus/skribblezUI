@@ -1,4 +1,6 @@
 /**
  * Use this stylesheet for shared styles that are more specific
- * than the base styles (such as directives).
+ * than the base styles (such as shared directives).
+ *
+ * NO PAGE/VIEW-SPECIFIC STYLES SHOULD GO HERE
  */
