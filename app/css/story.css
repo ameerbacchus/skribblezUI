@@ -8,6 +8,10 @@
     flex-direction: column;
 }
 
+#story-view i.nav-icon {
+    font-size: 2rem;
+}
+
 #story-view.loaded {
 
 }
@@ -19,7 +23,8 @@
 
 #story-view .prev-level {
     /* flex: none; */
-    height: 40px;
+    height: 60px;
+    text-align: center;
 }
 
 #story-view .current-level {
@@ -30,8 +35,12 @@
 
 #story-view .next-level {
     /* flex: none; */
-    /* height: 100px; */
+    /* height: 200px; */
     /* overflow: hidden; */
+}
+
+#story-view .next-chapters {
+    height: 100px;
 }
 
 #story-view .flex-row {
@@ -44,6 +53,10 @@
     padding: 20px;
 }
 
+#story-view .flex-row .side-col p {
+    color: #bbb;
+}
+
 #story-view .flex-row .primary-col {
     flex: 4 0 0;
     padding: 20px;
@@ -52,6 +65,8 @@
 #story-view .current-chapter {
     display: flex;
     flex-direction: column;
+    border: 2px dashed #ddd;
+    border-width: 0 2px;
 }
 
 #story-view .chapter-body {
@@ -65,9 +80,21 @@
 #story-view .chapter-body > p {
     flex: 1 0 auto;
     align-self: center;
-    padding: 0 20%;
+    /* padding: 0 10%; */
 }
 
+#story-view .next-chapters p {
+    /* padding: 0 10%; */
+}
+
+#story-view .next-chapters h3 {
+    text-align: center;
+}
+
+#story-view .read-on {
+    display: inline-block;
+    /* text-align: center; */
+}
 
 /**
  * Sequence Nav directive

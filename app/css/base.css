@@ -15,9 +15,13 @@ body, html {
 /* Links */
 a {
     cursor: pointer;
+    text-decoration: none;
+    color: #757575;
 }
 a, a:visited {}
-a:hover, a:focus {}
+a:hover, a:focus {
+    color: #000;
+}
 a:active {}
 a[disabled] {
     cursor: default;
@@ -53,13 +57,15 @@ input[type="submit"], button {
     transition: background-color 100ms ease-in;
 }
 input[type="submit"]:hover, button:hover {
-    background-color: #63d4f7;
+    /* background-color: #63d4f7; */
+    background-color: #e6e6e6;
 }
 input[type="submit"]:focus, button:focus {
     outline-width: 0;    /* override browser focus outline */
 }
 input[type="submit"]:active, button:active {
-    background-color: #00aeef;
+    /* background-color: #00aeef; */
+    background-color: #d7d7d7;
 }
 input[type="submit"][disabled], button[disabled] {
     background-color: #eee;

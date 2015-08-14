@@ -3,7 +3,8 @@
     <div class="prev-level">
         <h3 ng-if="sc.chapter.prev">
             <a href="" ng-click="sc.goToChapter($event, sc.chapter.prev.guid, sc.chapter.guid)">
-                Go back to Chapter <span ng-bind="sc.chapter.prev.sequence"></span>
+                <i class="nav-icon fa fa-arrow-circle-up"></i>
+                <div>Go Back</div>
             </a>
         </h3>
     </div>
@@ -59,13 +60,17 @@
             </div>
 
             <div class="primary-col">
-                <div ng-if="sc.chapter.next.length > 0">
-                    <h3>Read on...</h3>
+                <div>
                     <ul class="next-chapters">
                         <li ng-repeat="nextChapter in sc.chapter.next" ng-hide="nextChapter.guid !== sc.nextChapterId">
-                            <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
-                                <p ng-bind="nextChapter.body"></p>
-                            </a>
+                            <p ng-bind="nextChapter.body"></p>
+
+                            <h3>
+                                <a class="read-on" href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
+                                    <div>Read on...</div>
+                                    <i class="nav-icon fa fa-arrow-circle-down"></i>
+                                </a>
+                            </h3>
                         </li>
                     </ul>
                     <sk-story-sequence-nav sequence-data="sc.nextSequence" namespace="nextSequenceNav"></sk-story-sequence-nav>

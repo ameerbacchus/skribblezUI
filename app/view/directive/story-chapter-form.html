@@ -1,7 +1,11 @@
 <form name="chapterForm" novalidate ng-submit="chapterForm.$valid && scfc.submitForm(chapterForm)">
     <label for="">Body</label>
-    <textarea name="body" placeholder="Write the next chapter..." required="required" ng-model="scfc.form.body"></textarea>
+    <div>
+        <textarea name="body" placeholder="Write the next chapter..." required="required" ng-model="scfc.form.body"></textarea>
+    </div>
     <div ng-show="(chapterForm.$submitted || !chapterForm.body.$pristine) && chapterForm.body.$error.required" class="formError">Please enter a body for the new chapter</div>
 
-    <button type="submit">Publish</button>
+    <div>
+        <button type="submit">Publish</button>
+    </div>
 </form>
