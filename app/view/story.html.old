@@ -1,0 +1,97 @@
+<div id="story-view">
+
+    <div class="prev-level">
+        <h3 ng-if="sc.chapter.prev">
+            <a href="" ng-click="sc.goToChapter($event, sc.chapter.prev.guid, sc.chapter.guid)">
+                <i class="nav-icon fa fa-arrow-circle-up"></i>
+                <div>Go Back</div>
+            </a>
+        </h3>
+    </div>
+
+    <div class="current-level flex-row">
+
+        <div class="sibling left-sibling side-col left-col">
+            <div ng-if="sc.sequence.left">
+                <p class="content" ng-bind="sc.sequence.left.body"></p>
+            </div>
+        </div>
+
+        <div class="current-chapter primary-col">
+            <div class="chapter-header">
+                <h2 ng-bind="sc.storyTitle"></h2>
+                <h3>
+                    Chapter <span ng-bind="sc.chapter.sequence"></span>
+                </h3>
+            </div>
+
+            <div class="chapter-body">
+                <p class="content" ng-bind="sc.chapter.body"></p>
+            </div>
+
+            <div class="chapter-footer">
+                <div class="chapter-meta">
+                    <div class="author">
+                        by:
+                        <span ng-bind="sc.chapter.author.fullName"></span>
+                    </div>
+                    <div class="controls">
+                        <a href="">Like</a>
+                        <a href="">Share</a>
+                        <a href="" ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</a>
+                        <a href="" ng-hide="sc.chapter.sequence === 1" ng-click="sc.toggleForm('currentSequence')">Rewrite these lines</a>
+                    </div>
+                </div>
+                <sk-story-sequence-nav sequence-data="sc.sequence" namespace="sequenceNav"></sk-story-sequence-nav>
+            </div>
+        </div>
+
+        <div class="sibling right-sibling side-col right-col">
+            <div ng-if="sc.sequence.right">
+                <p class="content" ng-bind="sc.sequence.right.body"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="next-level">
+        <div class="flex-row">
+            <div class="side-col left-col">
+                <p class="content" ng-bind="sc.nextSequence.left.body"></p>
+            </div>
+
+            <div class="primary-col">
+                <div>
+                    <ul class="next-chapters">
+                        <li ng-repeat="nextChapter in sc.chapter.next" ng-hide="nextChapter.guid !== sc.nextChapterId">
+                            <p class="content" ng-bind="nextChapter.body"></p>
+                            <h3>
+                                <a class="read-on" href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
+                                    <div>Read on...</div>
+                                    <i class="nav-icon fa fa-arrow-circle-down"></i>
+                                </a>
+                            </h3>
+                        </li>
+                    </ul>
+                    <sk-story-sequence-nav sequence-data="sc.nextSequence" namespace="nextSequenceNav"></sk-story-sequence-nav>
+                </div>
+
+                <button ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</button>
+            </div>
+
+            <div class="side-col right-col">
+                <p class="content" ng-bind="sc.nextSequence.right.body"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modals">
+        <div ng-if="sc.chapter">
+            <div ng-show="sc.showForm.nextSequence">
+                <a href="" ng-click="sc.toggleForm('nextSequence', false)">[X]</a>
+                <h3>Add a few lines...</h3>
+                <sk-story-chapter-form chapter-id="{{sc.chapter.guid}}"></sk-story-chapter-form>
+            </div>
+        </div>
+    </div>
+
+</div>

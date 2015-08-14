@@ -1,0 +1,128 @@
+/**
+ * Story view
+ */
+#story-view {
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#story-view i.nav-icon {
+    font-size: 2rem;
+}
+
+#story-view.loaded {
+
+}
+
+
+#story-view .sibling {
+
+}
+
+#story-view .prev-level {
+    /* flex: none; */
+    height: 4rem;
+    text-align: center;
+}
+
+#story-view .current-level {
+    flex: 1 0 auto;
+    border: 2px dashed #ddd;
+    border-width: 2px 0;
+}
+
+#story-view .next-level {
+    /* flex: none; */
+    /* height: 200px; */
+    /* overflow: hidden; */
+}
+
+#story-view .next-chapters {
+    min-height: 8rem;
+}
+
+#story-view .flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+#story-view .flex-row .side-col {
+    flex: 1 0 0;
+    padding: 20px;
+}
+
+#story-view .side-col p.content {
+    color: #bbb;
+    height: 2.75rem;
+    display: block;
+    overflow: hidden;
+}
+
+#story-view .side-col.left-col p.content {
+    text-align: right;
+}
+
+#story-view .side-col.right-col p.content {
+
+}
+
+#story-view .flex-row .primary-col {
+    flex: 4 0 0;
+    padding: 20px;
+}
+
+#story-view .current-chapter {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px dashed #ddd;
+    border-width: 0 2px; */
+}
+
+#story-view .chapter-body {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    /* align-self: center;
+    padding: var(--space) var(--space) 0; */
+}
+
+#story-view .chapter-body > p {
+    flex: 1 0 auto;
+    align-self: center;
+    padding: 0 10%;
+}
+
+#story-view .next-level p.content {
+    height: 2.75rem;
+    display: block;
+    overflow: hidden;
+    /* color: #bbb; */
+}
+
+#story-view .next-chapters p.content {
+    padding: 0 10%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#story-view .next-chapters h3 {
+    text-align: center;
+}
+
+#story-view .read-on {
+    display: inline-block;
+    /* text-align: center; */
+}
+
+/**
+ * Sequence Nav directive
+ */
+#story-view .sequence-nav {
+    border-top: 1px solid #ddd;
+}
+
+#story-view .sequence-nav .nav-arrows {
+    float: right;
+}

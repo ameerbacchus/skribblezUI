@@ -4,10 +4,10 @@
     angular.module('skribblez')
         .controller('StoryCtrl', [
             '$routeParams',
-            '$location',
-            '$scope',
-            'ROUTES',
-            'UtilService',
+//            '$location',
+//            '$scope',
+//            'ROUTES',
+//            'UtilService',
             'SkribblezApiService',
             StoryCtrl
         ]);
@@ -15,205 +15,135 @@
     /**
      * StoryCtrl
      */
-    function StoryCtrl($routeParams, $location, $scope, ROUTES, UtilService, SkribblezApiService) {
+    function StoryCtrl($routeParams, SkribblezApiService) {
 
         // assign 'this' to a var so we always have a simple reference to it
         var vm = this;
 
         // view properties
-        vm.chapter = null;
+        vm.sequences = {};
         vm.storyTitle = '';
-        vm.chapterLoaded = false;
-        vm.sequence = null;
-        vm.nextSequence = null;
-        vm.nextChapterId = null;
-        vm.showForm = {
-            nextSequence: false,
-            currentSequence: false
-        };
 
-        // view functions
-        vm.goToChapter = goToChapter;
-        vm.toggleForm = toggleForm;
-
-        // Services
-        var Utils = UtilService;
+        // services
         var Api = SkribblezApiService;
 
-        // the story id for this view
-        var chapterId = $routeParams.chapterId;
+        // the kick-off!
+        loadChapter($routeParams.chapterId);
 
         // event handlers
-        $scope.$on('storyChapterForm:chapterCreated', function(evt, newChapter) {
-            loadData(newChapter.guid);
-
-            for (var key in vm.showForm) {
-                vm.showForm[key] = false;
-            }
-
-            // @todo -- need to display a notification
+        $('#story-view .story-wrapper').on('scroll', function(evt) {
+            console.log('scroll', arguments);
+//            $(".story-wrapper").scrollTop($(".story-wrapper").scrollTop() + $(".sequence").eq(0).position().top);
         });
-
-        // current level sequence nav
-        $scope.$on('sequenceNav:navigate', function(evt, chapter) {
-            loadData(chapter.guid);
-        });
-
-        // next level sequence nav
-        $scope.$on('nextSequenceNav:navigate', function(evt, sequenceChapter) {
-            vm.nextChapterId = sequenceChapter.guid;
-            vm.nextSequence = getSequenceData(vm.chapter.next, sequenceChapter.sequence, sequenceChapter.guid);
-        });
-
-        // kick-off
-        loadData(chapterId);
 
         /**
-         * Request a chapter with the given id and assign values to the view scope
+         * Calls the API to request a chapter
+         *
+         * @param string chapterId
          */
-        function loadData(chapterId) {
+        function loadChapter(chapterId) {
             Api.getChapter(chapterId).then(function(chapter) {
                 var storyTitle = chapter.title;
                 if (chapter.parent) {
                     storyTitle = chapter.parent.title;
                 }
-
-                if (chapter.prev) {
-                    getSiblings(chapter);
-                } else {
-                    vm.sequence = getSequenceData();
-                }
-
-                if (chapter.next.length > 0) {
-                    var nextChapter = chapter.next[0];
-                    if (!vm.nextChapterId) {
-                        vm.nextChapterId = nextChapter.guid;
-                    }
-                    vm.nextSequence = getSequenceData(chapter.next, nextChapter.sequence, vm.nextChapterId);
-                } else {
-                    vm.nextSequence = getSequenceData();
-                }
-
-                vm.chapter = chapter;
                 vm.storyTitle = storyTitle;
 
-                if (vm.chapterLoaded) {
-                    /*
-                     * @todo -- figure out transitioning between chapters
-                     * cases:
-                     * 1) transitioning "up" to previous chapter
-                     * 2) transitioning "down" to next chapter
-                     * 3) transitioning "left/right" to alternate chapter
-                     */
-                } else {
-                    // @todo -- transition in the page
+                getSequence(chapter.sequence).addChapter(chapter);
+
+                // request the previous chapter to get this chapter's siblings
+//                if (chapter.prev) {
+//                    Api.getChapter(chapter.prev.guid).then(function(prevChapter) {
+//                        // @todo
+//                    });
+//                }
+
+                if (chapter.next.length > 0) {
+                    getSequence(chapter.sequence + 1).addChapters(chapter.next);
                 }
 
-                vm.chapterLoaded = true;
+                return chapter;
             });
         }
 
         /**
-         * Finds the siblings chapters of the given chapter.
-         * @todo -- Currently we're requesting the previous chapter and looking at the .next
-         * array and looping through to find  this.  This should probably have it's own API call.
+         * Returns a sequence in the vm.sequences array.
+         * If it doesn't exist, create it.
          *
-         * @param ChapterModel chapter
+         * @param array chapters
+         * @return Sequence
          */
-        function getSiblings(chapter) {
-            Api.getChapter(chapter.prev.guid).then(function(prevChapter) {
-                vm.sequence = getSequenceData(prevChapter.next, chapter.sequence, chapter.guid);
-            });
-        }
-
-        /**
-         * Gets sequence metaData given a sequence/array of chapters and the 'current' chapter id
-         *
-         * @param array<ChapterModel> sequenceChapters
-         * @param ChapterModel chapter
-         * @return object
-         */
-        function getSequenceData(sequenceChapters, sequenceNumber, chapterId) {
-            sequenceChapters = sequenceChapters || [];
-            sequenceNumber = sequenceNumber || 1;
-            chapterId = chapterId || '';
-
-            var leftSibling = null,
-                rightSibling = null,
-                level = sequenceNumber,
-                count = sequenceChapters.length,
-                position = 1;
-
-            for (var i = 0; i < count; i++) {
-                var chap = sequenceChapters[i];
-                if (chapterId === chap.guid) {
-                    position = i + 1;
-
-                    if (i > 0) {
-                        leftSibling = sequenceChapters[i - 1];
-                    }
-
-                    if (i < count - 1) {
-                        rightSibling = sequenceChapters[i + 1];
-                    }
-
-                    if (leftSibling && rightSibling) {
-                        break;
-                    }
-                }
+        function getSequence(level) {
+            if (typeof vm.sequences[level] === 'undefined') {
+                vm.sequences[level] = new Sequence(level);
             }
 
-            return {
-                left: leftSibling,
-                right: rightSibling,
-                level: level,
-                position: position,
-                count: count || 1
-            };
-        }
-
-        /**
-         * Redirects the view to another chapter
-         *
-         * @param MouseEvent evt
-         * @param string chapterId
-         * @param string nextChapterId
-         */
-        function goToChapter(evt, chapterId, nextChapterId) {
-            evt.preventDefault();
-            var $target = $(evt.currentTarget);
-
-            if (!$target.attr('disabled')) {
-                // store this in the case that we're navigating "up" -- it will retain the chapter we came from in the "Read on..." section
-                vm.nextChapterId = nextChapterId ? nextChapterId : null;
-                loadData(chapterId);
-
-                // @todo -- figure out how to change the url without causing a view refresh
-
-//                var url = Utils.buildUrl(ROUTES.story, {
-//                    chapterId: chapterId
-//                });
-//
-//                $location.path(url);
-            }
-        };
-
-        /**
-         * Toggle a flag in the showForm object
-         *
-         * @param string key
-         * @param boolean forceVal | optional
-         */
-        function toggleForm(key, forceVal) {
-            if (typeof vm.showForm[key] !== 'undefined') {
-                if (typeof forceVal !== 'undefined') {
-                    vm.showForm[key] = forceVal;
-                } else {
-                    vm.showForm[key] = !vm.showForm[key];
-                }
-            }
+            return vm.sequences[level];
         }
 
         console.log('StoryCtrl', vm);
     }
+
+    /**
+     * [Constructor]
+     *
+     * @param number level
+     */
+    function Sequence(level) {
+        this.level = level;
+        this.chapters = [];
+        this.chapterMap = {};
+    }
+
+    /**
+     * [Setter]
+     *
+     * @param array<ChapterModel> chapters
+     * @return this
+     */
+    Sequence.prototype.setChapters = function(chapters) {
+        this.chapters = chapters;
+        return this;
+    };
+
+    /**
+     * Adds a chapter to the sequence
+     *
+     * @param ChapterModel chapter
+     * @returns this
+     */
+    Sequence.prototype.addChapter = function(chapter) {
+        if (typeof this.chapterMap[chapter.guid] !== 'undefined') {
+            for (var i = 0, len = this.chapters.length; i < len; i++) {
+                var ch = this.chapters[i];
+                if (ch.guid === chapter.guid) {
+                    this.chapters[i] = chapter;
+                    break;
+                }
+            }
+        } else {
+            this.chapters.push(chapter);
+        }
+
+        this.chapterMap[chapter.guid] = chapter;
+
+        return this;
+    };
+
+    /**
+     * Adds multiple chapters to the sequence
+     *
+     * @todo -- optimize this; we don't need to call this.addChapter and run through that loop every single time
+     *
+     * @param array<ChapterModel> chapters
+     * @return this
+     */
+    Sequence.prototype.addChapters = function(chapters) {
+        for (var i = 0, len = chapters.length; i < len; i++) {
+            this.addChapter(chapters[i]);
+        }
+
+        return this;
+    };
+
 })();
