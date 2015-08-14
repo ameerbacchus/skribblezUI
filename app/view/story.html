@@ -11,9 +11,9 @@
 
     <div class="current-level flex-row">
 
-        <div class="sibling left-sibling side-col">
+        <div class="sibling left-sibling side-col left-col">
             <div ng-if="sc.sequence.left">
-                <p ng-bind="sc.sequence.left.body"></p>
+                <p class="content" ng-bind="sc.sequence.left.body"></p>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="sibling right-sibling side-col">
+        <div class="sibling right-sibling side-col right-col">
             <div ng-if="sc.sequence.right">
                 <p class="content" ng-bind="sc.sequence.right.body"></p>
             </div>
@@ -55,7 +55,7 @@
 
     <div class="next-level">
         <div class="flex-row">
-            <div class="side-col">
+            <div class="side-col left-col">
                 <p class="content" ng-bind="sc.nextSequence.left.body"></p>
             </div>
 
@@ -63,13 +63,13 @@
                 <div>
                     <ul class="next-chapters">
                         <li ng-repeat="nextChapter in sc.chapter.next" ng-hide="nextChapter.guid !== sc.nextChapterId">
+                            <p class="content" ng-bind="nextChapter.body"></p>
                             <h3>
                                 <a class="read-on" href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
                                     <div>Read on...</div>
                                     <i class="nav-icon fa fa-arrow-circle-down"></i>
                                 </a>
                             </h3>
-                            <p class="content" ng-bind="nextChapter.body"></p>
                         </li>
                     </ul>
                     <sk-story-sequence-nav sequence-data="sc.nextSequence" namespace="nextSequenceNav"></sk-story-sequence-nav>
@@ -78,7 +78,7 @@
                 <button ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</button>
             </div>
 
-            <div class="side-col">
+            <div class="side-col right-col">
                 <p class="content" ng-bind="sc.nextSequence.right.body"></p>
             </div>
         </div>
