@@ -68,6 +68,10 @@
     padding: 0 20%;
 }
 
+
+/**
+ * Sequence Nav directive
+ */
 #story-view .sequence-nav {
     border-top: 1px solid #ddd;
 }

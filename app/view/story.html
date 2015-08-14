@@ -2,7 +2,7 @@
 
     <div class="prev-level">
         <h3 ng-if="sc.chapter.prev">
-            <a href="" ng-click="sc.goToChapter($event, sc.chapter.prev.guid)">
+            <a href="" ng-click="sc.goToChapter($event, sc.chapter.prev.guid, sc.chapter.guid)">
                 Go back to Chapter <span ng-bind="sc.chapter.prev.sequence"></span>
             </a>
         </h3>
@@ -31,14 +31,12 @@
             <div class="chapter-footer">
                 <div class="chapter-meta">
                     <div class="author">
-                        Author:
+                        by:
                         <span ng-bind="sc.chapter.author.fullName"></span>
                     </div>
-                    <div class="social">
-                        @todo -- social network links
-                    </div>
                     <div class="controls">
-                        @todo -- controls
+                        <a href="">Like</a>
+                        <a href="">Share</a>
                         <a href="" ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</a>
                         <a href="" ng-hide="sc.chapter.sequence === 1" ng-click="sc.toggleForm('currentSequence')">Rewrite these lines</a>
                     </div>
@@ -56,18 +54,18 @@
 
     <div class="next-level">
         <div class="flex-row">
-            <div class="side-col"></div>
+            <div class="side-col">
+                <p ng-bind="sc.nextSequence.left.body"></p>
+            </div>
+
             <div class="primary-col">
                 <div ng-if="sc.chapter.next.length > 0">
                     <h3>Read on...</h3>
                     <ul class="next-chapters">
                         <li ng-repeat="nextChapter in sc.chapter.next" ng-hide="nextChapter.guid !== sc.nextChapterId">
-                            <h4>
-                                <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
-                                    Chapter <span ng-bind="nextChapter.sequence"></span>
-                                </a>
-                            </h4>
-                            <p ng-bind="nextChapter.body"></p>
+                            <a href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
+                                <p ng-bind="nextChapter.body"></p>
+                            </a>
                         </li>
                     </ul>
                     <sk-story-sequence-nav sequence-data="sc.nextSequence" namespace="nextSequenceNav"></sk-story-sequence-nav>
@@ -75,7 +73,10 @@
 
                 <button ng-click="sc.toggleForm('nextSequence', true)">Add a few lines</button>
             </div>
-            <div class="side-col"></div>
+
+            <div class="side-col">
+                <p ng-bind="sc.nextSequence.right.body"></p>
+            </div>
         </div>
     </div>
 

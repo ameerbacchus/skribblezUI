@@ -62,7 +62,7 @@
         // next level sequence nav
         $scope.$on('nextSequenceNav:navigate', function(evt, sequenceChapter) {
             vm.nextChapterId = sequenceChapter.guid;
-            vm.nextSequence = getSequenceData(vm.chapter.next, sequenceChapter);
+            vm.nextSequence = getSequenceData(vm.chapter.next, sequenceChapter.sequence, sequenceChapter.guid);
         });
 
         // kick-off
@@ -81,13 +81,17 @@
                 if (chapter.prev) {
                     getSiblings(chapter);
                 } else {
-                    vm.sequence = getSequenceData([]);
+                    vm.sequence = getSequenceData();
                 }
 
                 if (chapter.next.length > 0) {
                     var nextChapter = chapter.next[0];
-                    vm.nextChapterId = nextChapter.guid;
-                    vm.nextSequence = getSequenceData(chapter.next, nextChapter);
+                    if (!vm.nextChapterId) {
+                        vm.nextChapterId = nextChapter.guid;
+                    }
+                    vm.nextSequence = getSequenceData(chapter.next, nextChapter.sequence, vm.nextChapterId);
+                } else {
+                    vm.nextSequence = getSequenceData();
                 }
 
                 vm.chapter = chapter;
@@ -118,7 +122,7 @@
          */
         function getSiblings(chapter) {
             Api.getChapter(chapter.prev.guid).then(function(prevChapter) {
-                vm.sequence = getSequenceData(prevChapter.next, chapter);
+                vm.sequence = getSequenceData(prevChapter.next, chapter.sequence, chapter.guid);
             });
         }
 
@@ -129,16 +133,20 @@
          * @param ChapterModel chapter
          * @return object
          */
-        function getSequenceData(sequenceChapters, chapter) {
+        function getSequenceData(sequenceChapters, sequenceNumber, chapterId) {
+            sequenceChapters = sequenceChapters || [];
+            sequenceNumber = sequenceNumber || 1;
+            chapterId = chapterId || '';
+
             var leftSibling = null,
                 rightSibling = null,
-                level = chapter ? chapter.sequence : 1,
+                level = sequenceNumber,
                 count = sequenceChapters.length,
                 position = 1;
 
             for (var i = 0; i < count; i++) {
                 var chap = sequenceChapters[i];
-                if (chapter.guid === chap.guid) {
+                if (chapterId === chap.guid) {
                     position = i + 1;
 
                     if (i > 0) {
@@ -169,12 +177,15 @@
          *
          * @param MouseEvent evt
          * @param string chapterId
+         * @param string nextChapterId
          */
-        function goToChapter(evt, chapterId) {
+        function goToChapter(evt, chapterId, nextChapterId) {
             evt.preventDefault();
             var $target = $(evt.currentTarget);
 
             if (!$target.attr('disabled')) {
+                // store this in the case that we're navigating "up" -- it will retain the chapter we came from in the "Read on..." section
+                vm.nextChapterId = nextChapterId ? nextChapterId : null;
                 loadData(chapterId);
 
                 // @todo -- figure out how to change the url without causing a view refresh
