@@ -23,7 +23,7 @@
 
 #story-view .prev-level {
     /* flex: none; */
-    height: 60px;
+    height: 4em;
     text-align: center;
 }
 
@@ -40,7 +40,7 @@
 }
 
 #story-view .next-chapters {
-    height: 100px;
+    height: 7em;
 }
 
 #story-view .flex-row {
@@ -53,8 +53,11 @@
     padding: 20px;
 }
 
-#story-view .flex-row .side-col p {
+#story-view .flex-row .side-col p.content {
     color: #bbb;
+    height: 2.75em;
+    display: block;
+    overflow: hidden;
 }
 
 #story-view .flex-row .primary-col {
@@ -65,8 +68,8 @@
 #story-view .current-chapter {
     display: flex;
     flex-direction: column;
-    border: 2px dashed #ddd;
-    border-width: 0 2px;
+    /* border: 2px dashed #ddd;
+    border-width: 0 2px; */
 }
 
 #story-view .chapter-body {
@@ -80,11 +83,15 @@
 #story-view .chapter-body > p {
     flex: 1 0 auto;
     align-self: center;
-    /* padding: 0 10%; */
+    padding: 0 10%;
 }
 
-#story-view .next-chapters p {
-    /* padding: 0 10%; */
+#story-view .next-level p.content {
+    padding: 0 10%;
+    height: 2.75em;
+    display: block;
+    overflow: hidden;
+    /* color: #bbb; */
 }
 
 #story-view .next-chapters h3 {

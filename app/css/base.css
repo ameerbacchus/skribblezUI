@@ -94,6 +94,9 @@ em {}
 p {
     margin: 0;
 }
+p.content {
+    white-space: pre-wrap;
+}
 
 
 /* Lists */

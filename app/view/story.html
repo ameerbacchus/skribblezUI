@@ -26,7 +26,7 @@
             </div>
 
             <div class="chapter-body">
-                <p ng-bind="sc.chapter.body"></p>
+                <p class="content" ng-bind="sc.chapter.body"></p>
             </div>
 
             <div class="chapter-footer">
@@ -48,7 +48,7 @@
 
         <div class="sibling right-sibling side-col">
             <div ng-if="sc.sequence.right">
-                <p ng-bind="sc.sequence.right.body"></p>
+                <p class="content" ng-bind="sc.sequence.right.body"></p>
             </div>
         </div>
     </div>
@@ -56,21 +56,20 @@
     <div class="next-level">
         <div class="flex-row">
             <div class="side-col">
-                <p ng-bind="sc.nextSequence.left.body"></p>
+                <p class="content" ng-bind="sc.nextSequence.left.body"></p>
             </div>
 
             <div class="primary-col">
                 <div>
                     <ul class="next-chapters">
                         <li ng-repeat="nextChapter in sc.chapter.next" ng-hide="nextChapter.guid !== sc.nextChapterId">
-                            <p ng-bind="nextChapter.body"></p>
-
                             <h3>
                                 <a class="read-on" href="" ng-click="sc.goToChapter($event, nextChapter.guid)">
                                     <div>Read on...</div>
                                     <i class="nav-icon fa fa-arrow-circle-down"></i>
                                 </a>
                             </h3>
+                            <p class="content" ng-bind="nextChapter.body"></p>
                         </li>
                     </ul>
                     <sk-story-sequence-nav sequence-data="sc.nextSequence" namespace="nextSequenceNav"></sk-story-sequence-nav>
@@ -80,7 +79,7 @@
             </div>
 
             <div class="side-col">
-                <p ng-bind="sc.nextSequence.right.body"></p>
+                <p class="content" ng-bind="sc.nextSequence.right.body"></p>
             </div>
         </div>
     </div>
