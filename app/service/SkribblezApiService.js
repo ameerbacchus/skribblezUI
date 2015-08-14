@@ -71,6 +71,7 @@
                     userRating = MB.build('Rating', rawData.userRating);
 
                 chapter
+                    .setFullyLoaded(true)
                     .set('next', nextChapters)
                     .set('comments', comments)
                     .set('rating', rating)

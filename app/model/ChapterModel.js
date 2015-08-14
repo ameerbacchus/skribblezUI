@@ -72,10 +72,36 @@
                  * @var RatingModel
                  */
                 this.userRating = null;
+
+                /**
+                 * Custom attribute used internally
+                 * @var boolean
+                 */
+                this.fullyLoaded = false;
             }
 
             // Extend BaseModel
             ChapterModel.prototype = Object.create(BaseModel.prototype);
+
+            /**
+             * [Getter]
+             *
+             * @return boolean
+             */
+            ChapterModel.prototype.getFullyLoaded = function() {
+                return this.fullyLoaded;
+            };
+
+            /**
+             * [Setter]
+             *
+             * @param boolean fullyLoaded
+             * @return this
+             */
+            ChapterModel.prototype.setFullyLoaded = function(fullyLoaded) {
+                this.fullyLoaded = true;
+                return this;
+            };
 
             // return class
             return ChapterModel;
