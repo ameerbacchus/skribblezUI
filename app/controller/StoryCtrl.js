@@ -21,12 +21,15 @@
         var vm = this;
 
         // view properties
-        vm.sequences = {};
+//        vm.sequences = {};
+        vm.sequences = [];
         vm.storyTitle = '';
 
         // services
         var Api = SkribblezApiService;
-        var sequenceCount = 0;
+
+        // other vars
+//        var sequenceCount = 0;
         var sequenceIndex = 0;
 
         // the kick-off!
@@ -34,12 +37,13 @@
 
         // event handlers
         var $scrollContainer = $('#story-view div.story-wrapper'),
-            mwListen = true;
+            walkListen = true;
 
         $scrollContainer.on('mousewheel DOMMouseScroll', function(evt) {
+
             // @todo -- find an 'angular' way to do this
 
-            if (mwListen) {
+            if (walkListen) {
                 var $scrollContainer = $(this),
                     $sequence = null,
                     deltaY = 0,
@@ -58,36 +62,116 @@
 
                 if (deltaY < 0 && sequenceIndex > 0) {
                     incr = -1;
-                } else if (deltaY > 0 && sequenceIndex < sequenceCount - 1) {
+                } else if (deltaY > 0 && sequenceIndex < vm.sequences.length - 1) {
                     incr = 1;
                 }
 
                 if (incr !== 0) {
-                    mwListen = false;
-                    $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex + incr);
-
-                    if ($sequence && $sequence.length) {
-                        var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
-                        $scrollContainer.animate({
-                            scrollTop: newPos
-                        }, {
-                            duration: 400,
-                            complete: function() {
-                                mwListen = true;
-                            }
-                        });
-                    }
-
+//                    walkListen = false;
                     sequenceIndex = sequenceIndex + incr;
+                    scrollToSequence(sequenceIndex);
                 }
             }
         });
 
-        $(window).on('resize', function(evt) {
+        $(window).off('resize').on('resize', function(evt) {
             var $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex);
             var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
             $scrollContainer.scrollTop(newPos)
         });
+
+        // @todo -- use ng-keyup or ng-keydown
+        // @todo -- set ng-keyup or ng-keydown on the window object and broadcast an event down from there
+        $(window).off('keydown').on('keydown', function(evt) {
+            if (walkListen) {
+                var KEYCODES = {
+                    LEFT: 37,
+                    UP: 38,
+                    RIGHT: 39,
+                    DOWN: 40
+                };
+
+                switch (evt.keyCode) {
+                    case KEYCODES.LEFT:
+                        var sequence = getSequence(sequenceIndex + 1);
+                        if (sequence.hasPrevChapter()) {
+                            sequence.frameIndex--;
+                            scrollToFrame(sequence.frameIndex);
+                        }
+                        break;
+
+                    case KEYCODES.UP:
+                        if (sequenceIndex > 0) {
+                            sequenceIndex--;
+                            scrollToSequence(sequenceIndex);
+                        }
+                        break;
+
+                    case KEYCODES.RIGHT:
+                        var sequence = getSequence(sequenceIndex + 1);
+                        if (sequence.hasNextChapter()) {
+                            sequence.frameIndex++;
+                            scrollToFrame(sequence.frameIndex);
+                        }
+                        break;
+
+                    case KEYCODES.DOWN:
+                        if (sequenceIndex < vm.sequences.length - 1) {
+                            sequenceIndex++;
+                            scrollToSequence(sequenceIndex);
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+
+        /**
+         * @todo
+         */
+        function scrollToSequence(index) {
+            walkListen = false;
+
+            var $sequence = $scrollContainer.find('.sequence').eq(index);
+
+            if ($sequence && $sequence.length) {
+                var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
+                $scrollContainer.animate({
+                    scrollTop: newPos
+                }, {
+                    duration: 400,
+                    complete: function() {
+                        walkListen = true;
+                    }
+                });
+            }
+        }
+
+        /**
+         * @todo
+         */
+        function scrollToFrame(index) {
+            walkListen = false;
+
+            var $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex),
+                $frames = $sequence.find('div.frames'),
+                $targetFrame = $frames.find('div.frame').eq(index),
+                newPos = $targetFrame.outerWidth() * index;
+
+            if ($targetFrame && $targetFrame.length) {
+                $frames.animate({
+                    scrollLeft: newPos
+                }, {
+                    duration: 400,
+                    complete: function() {
+                        walkListen = true;
+                    }
+                });
+            }
+
+        }
 
         /**
          * Calls the API to request a chapter
@@ -95,6 +179,7 @@
          * @param string chapterId
          */
         function loadChapter(chapterId) {
+            console.log('loadChapter', chapterId);
             Api.getChapter(chapterId).then(function(chapter) {
                 var storyTitle = chapter.title;
                 if (chapter.parent) {
@@ -112,7 +197,11 @@
 //                }
 
                 if (chapter.next.length > 0) {
-                    getSequence(chapter.sequence + 1).addChapters(chapter.next);
+                    getSequence(chapter.sequence + 1, true).addChapters(chapter.next);
+                    console.log('vm.sequences 1', vm.sequences);
+                } else {
+                    // @todo -- remove later sequences
+                    console.log('vm.sequences 2', vm.sequences);
                 }
 
                 return chapter;
@@ -120,19 +209,25 @@
         }
 
         /**
-         * Returns a sequence in the vm.sequences array.
+         * Returns a sequence in the vm.sequences object.
          * If it doesn't exist, create it.
          *
-         * @param array chapters
+         * @param number level
+         * @param boolean replace | optional
          * @return Sequence
          */
-        function getSequence(level) {
-            if (typeof vm.sequences[level] === 'undefined') {
-                vm.sequences[level] = new Sequence(level);
-                sequenceCount++;
+        function getSequence(level, replace) {
+            var index = level - 1;
+            if (typeof vm.sequences[index] === 'undefined') {
+                console.log('new sequence', index);
+                vm.sequences[index] = new Sequence(level);
+//                sequenceCount++;
+            } else if (replace) {
+                console.log('replace sequence', index);
+                vm.sequences[index] = new Sequence(level);
             }
 
-            return vm.sequences[level];
+            return vm.sequences[index];
         }
 
         console.log('StoryCtrl', vm);
@@ -147,6 +242,7 @@
         this.level = level;
         this.chapters = [];
         this.chapterMap = {};
+        this.frameIndex = 0;
     }
 
     /**
@@ -198,6 +294,24 @@
         }
 
         return this;
+    };
+
+    /**
+     * @todo
+     *
+     * @return boolean
+     */
+    Sequence.prototype.hasNextChapter = function() {
+        return this.frameIndex < this.chapters.length - 1;
+    };
+
+    /**
+     * @todo
+     *
+     * @return boolean
+     */
+    Sequence.prototype.hasPrevChapter = function() {
+        return this.frameIndex > 0;
     };
 
 })();

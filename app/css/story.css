@@ -38,6 +38,8 @@
     display: block;
     width: auto;
     white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
 
     height: 100%;
 }
