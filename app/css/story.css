@@ -30,12 +30,16 @@
 
 #story-view .sequence {
     display: block;
+
+    height: 100%;
 }
 
 #story-view .frames {
     display: block;
     width: auto;
     white-space: nowrap;
+
+    height: 100%;
 }
 
 #story-view .frame {

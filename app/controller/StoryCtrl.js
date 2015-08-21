@@ -47,7 +47,7 @@
 
                 switch (evt.type) {
                     case 'mousewheel':    // Chrome, IE
-                        deltaY = evt.originalEvent.deltaY
+                        deltaY = -evt.originalEvent.wheelDelta;
                         break;
                     case 'DOMMouseScroll':    // Firefox
                         deltaY = evt.originalEvent.detail;
