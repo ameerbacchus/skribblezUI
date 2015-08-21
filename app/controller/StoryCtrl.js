@@ -36,14 +36,25 @@
         var $scrollContainer = $('#story-view div.story-wrapper'),
             mwListen = true;
 
-        $scrollContainer.on('mousewheel', function(evt) {
+        $scrollContainer.on('mousewheel DOMMouseScroll', function(evt) {
             // @todo -- find an 'angular' way to do this
 
             if (mwListen) {
                 var $scrollContainer = $(this),
                     $sequence = null,
-                    deltaY = evt.originalEvent.deltaY,
+                    deltaY = 0,
                     incr = 0;
+
+                switch (evt.type) {
+                    case 'mousewheel':    // Chrome, IE
+                        deltaY = evt.originalEvent.deltaY
+                        break;
+                    case 'DOMMouseScroll':    // Firefox
+                        deltaY = evt.originalEvent.detail;
+                        break;
+                    default:
+                        break;
+                }
 
                 if (deltaY < 0 && sequenceIndex > 0) {
                     incr = -1;
