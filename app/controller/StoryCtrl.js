@@ -61,104 +61,34 @@
             }
         });
 
+        // scroll 'left' to the previous chapter
+        $scope.$on(EVENT_NS.STORY + 'walkLeft', function() {
+            if (walkListen) {
+                var sequence = getCurrentSequence();
+                if (sequence.hasPrevChapter()) {
+                    walkListen = false;
+                    sequence.frameIndex--;
+                    $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+                }
+            }
+        });
+
+        // scroll 'right' to the next chapter
+        $scope.$on(EVENT_NS.STORY + 'walkRight', function() {
+            if (walkListen) {
+                var sequence = getCurrentSequence();
+                if (sequence.hasNextChapter()) {
+                    walkListen = false;
+                    sequence.frameIndex++;
+                    $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+                }
+            }
+        });
+
         // fired at the end of a sequence/frame transition
         $scope.$on(EVENT_NS.STORY + 'walkEnd', function() {
             walkListen = true;
         });
-
-        /**
-         * Window resize handler
-         */
-//        $scope.$on(EVENT_NS.GLOBAL + 'windowResize', function(evt) {
-//            var sequence = getCurrentSequence();
-////            scrollToSequence(sequenceIndex, true);
-//            scrollToFrame(sequence.frameIndex, true);
-//        });
-
-
-        /**
-         * Arrow key handler
-         *
-         * @todo -- set ng-keyup or ng-keydown on the window object and broadcast an event down from there
-         */
-//        $(window).off('keydown').on('keydown', function(evt) {
-//            if (walkListen) {
-//                var KEYCODES = {
-//                    LEFT: 37,
-//                    UP: 38,
-//                    RIGHT: 39,
-//                    DOWN: 40
-//                };
-//
-//                switch (evt.keyCode) {
-//                    case KEYCODES.LEFT:
-//                        var sequence = getCurrentSequence();
-//                        if (sequence.hasPrevChapter()) {
-//                            sequence.frameIndex--;
-//                            scrollToFrame(sequence.frameIndex);
-//                        }
-//                        break;
-//
-//                    case KEYCODES.UP:
-//                        if (sequenceIndex > 0) {
-//                            vm.sequenceIndex = sequenceIndex--;
-////                            scrollToSequence(sequenceIndex);
-//                        }
-//                        break;
-//
-//                    case KEYCODES.RIGHT:
-//                        var sequence = getCurrentSequence();
-//                        if (sequence.hasNextChapter()) {
-//                            sequence.frameIndex++;
-//                            scrollToFrame(sequence.frameIndex);
-//                        }
-//                        break;
-//
-//                    case KEYCODES.DOWN:
-//                        if (sequenceIndex < vm.sequences.length - 1) {
-//                            vm.sequenceIndex = sequenceIndex++;
-////                            scrollToSequence(sequenceIndex);
-//                        }
-//                        break;
-//
-//                    default:
-//                        break;
-//                }
-//            }
-//        });
-
-        /**
-         * Scroll horizontally to a specific frame
-         *
-         * @param number index
-         * @param boolean skipAnimation | optional
-         */
-        function scrollToFrame(index, skipAnimation) {
-            walkListen = false;
-
-            var $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex),
-                $frames = $sequence.find('div.frames'),
-                $targetFrame = $frames.find('div.frame').eq(index),
-                newPos = $targetFrame.outerWidth() * index;
-
-            if ($targetFrame && $targetFrame.length) {
-                if (skipAnimation) {
-                    $frames.scrollLeft(newPos);
-                    walkListen = true;
-
-                } else {
-                    $frames.animate({
-                        scrollLeft: newPos
-                    }, {
-                        duration: 400,
-                        complete: function() {
-                            walkListen = true;
-                        }
-                    });
-                }
-
-            }
-        }
 
         /**
          * Calls the API to request a chapter
@@ -295,7 +225,7 @@
     };
 
     /**
-     * @todo
+     * Returns whether or not there is a chapter to the 'left' of the current one
      *
      * @return boolean
      */
@@ -304,7 +234,7 @@
     };
 
     /**
-     * @todo
+     * Returns whether or not there is a chapter to the 'right' of the current one
      *
      * @return boolean
      */

@@ -90,6 +90,7 @@
                         var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
                         if (skipAnimation) {
                             $scrollContainer.scrollTop(newPos);
+                            $scope.$emit(NS + 'walkEnd');
 
                         } else {
                             $scrollContainer.animate({
