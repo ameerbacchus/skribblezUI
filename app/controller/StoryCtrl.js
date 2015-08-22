@@ -32,12 +32,9 @@
         // other vars
         var walkListen = true;
 
-        // the kick-off!
-        loadChapter($routeParams.chapterId);
-
-        // event handlers
-        var $scrollContainer = $('#story-view div.story-wrapper');    // parent container of 'sequence' dom elements; the 'sk-story-sequence' directive
-
+        /*
+         * Event handlers
+         */
         // scroll 'up' to the previous sequence
         $scope.$on(EVENT_NS.STORY + 'walkUp', function() {
             if (walkListen && vm.sequenceIndex > 0) {
@@ -156,6 +153,9 @@
         }
 
         console.log('StoryCtrl', vm);
+
+        // the kick-off!
+        loadChapter($routeParams.chapterId);
     }
 
     /**
