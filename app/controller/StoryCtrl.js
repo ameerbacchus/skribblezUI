@@ -29,13 +29,13 @@
 
         // other vars
         var sequenceIndex = 0;
+        var walkListen = true;
 
         // the kick-off!
         loadChapter($routeParams.chapterId);
 
         // event handlers
-        var $scrollContainer = $('#story-view div.story-wrapper'),
-            walkListen = true;
+        var $scrollContainer = $('#story-view div.story-wrapper');    // parent container of 'sequence' dom elements; the 'sk-story-sequence' directive
 
         /**
          * Scroll wheel handler
@@ -54,17 +54,20 @@
                     case 'mousewheel':    // Chrome, IE
                         deltaY = -evt.originalEvent.wheelDelta;
                         break;
+
                     case 'DOMMouseScroll':    // Firefox
                         deltaY = evt.originalEvent.detail;
                         break;
+
                     default:
                         break;
                 }
 
                 if (deltaY < 0 && sequenceIndex > 0) {
-                    incr = -1;
+                    incr = -1;    // go up
+
                 } else if (deltaY > 0 && sequenceIndex < vm.sequences.length - 1) {
-                    incr = 1;
+                    incr = 1;    // go down
                 }
 
                 if (incr !== 0) {
