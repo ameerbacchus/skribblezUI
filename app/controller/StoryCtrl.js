@@ -21,7 +21,6 @@
         var vm = this;
 
         // view properties
-//        vm.sequences = {};
         vm.sequences = [];
         vm.storyTitle = '';
 
@@ -29,7 +28,6 @@
         var Api = SkribblezApiService;
 
         // other vars
-//        var sequenceCount = 0;
         var sequenceIndex = 0;
 
         // the kick-off!
@@ -39,6 +37,9 @@
         var $scrollContainer = $('#story-view div.story-wrapper'),
             walkListen = true;
 
+        /**
+         * Scroll wheel handler
+         */
         $scrollContainer.on('mousewheel DOMMouseScroll', function(evt) {
 
             // @todo -- find an 'angular' way to do this
@@ -67,21 +68,26 @@
                 }
 
                 if (incr !== 0) {
-//                    walkListen = false;
                     sequenceIndex = sequenceIndex + incr;
                     scrollToSequence(sequenceIndex);
                 }
             }
         });
 
+        /**
+         * Window resize handler
+         */
         $(window).off('resize').on('resize', function(evt) {
-            var $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex);
-            var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
-            $scrollContainer.scrollTop(newPos)
+            var sequence = getCurrentSequence();
+            scrollToSequence(sequenceIndex, true);
+            scrollToFrame(sequence.frameIndex, true);
         });
 
-        // @todo -- use ng-keyup or ng-keydown
-        // @todo -- set ng-keyup or ng-keydown on the window object and broadcast an event down from there
+        /**
+         * Arrow key handler
+         *
+         * @todo -- set ng-keyup or ng-keydown on the window object and broadcast an event down from there
+         */
         $(window).off('keydown').on('keydown', function(evt) {
             if (walkListen) {
                 var KEYCODES = {
@@ -93,7 +99,7 @@
 
                 switch (evt.keyCode) {
                     case KEYCODES.LEFT:
-                        var sequence = getSequence(sequenceIndex + 1);
+                        var sequence = getCurrentSequence();
                         if (sequence.hasPrevChapter()) {
                             sequence.frameIndex--;
                             scrollToFrame(sequence.frameIndex);
@@ -108,7 +114,7 @@
                         break;
 
                     case KEYCODES.RIGHT:
-                        var sequence = getSequence(sequenceIndex + 1);
+                        var sequence = getCurrentSequence();
                         if (sequence.hasNextChapter()) {
                             sequence.frameIndex++;
                             scrollToFrame(sequence.frameIndex);
@@ -129,30 +135,42 @@
         });
 
         /**
-         * @todo
+         * Scroll vertically to a specific sequence
+         *
+         * @param number index
+         * @param boolean skipAnimation | optional
          */
-        function scrollToSequence(index) {
+        function scrollToSequence(index, skipAnimation) {
             walkListen = false;
 
             var $sequence = $scrollContainer.find('.sequence').eq(index);
 
             if ($sequence && $sequence.length) {
                 var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
-                $scrollContainer.animate({
-                    scrollTop: newPos
-                }, {
-                    duration: 400,
-                    complete: function() {
-                        walkListen = true;
-                    }
-                });
+                if (skipAnimation) {
+                    $scrollContainer.scrollTop(newPos);
+                    walkListen = true;
+
+                } else {
+                    $scrollContainer.animate({
+                        scrollTop: newPos
+                    }, {
+                        duration: 400,
+                        complete: function() {
+                            walkListen = true;
+                        }
+                    });
+                }
             }
         }
 
         /**
-         * @todo
+         * Scroll horizontally to a specific frame
+         *
+         * @param number index
+         * @param boolean skipAnimation | optional
          */
-        function scrollToFrame(index) {
+        function scrollToFrame(index, skipAnimation) {
             walkListen = false;
 
             var $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex),
@@ -161,16 +179,22 @@
                 newPos = $targetFrame.outerWidth() * index;
 
             if ($targetFrame && $targetFrame.length) {
-                $frames.animate({
-                    scrollLeft: newPos
-                }, {
-                    duration: 400,
-                    complete: function() {
-                        walkListen = true;
-                    }
-                });
-            }
+                if (skipAnimation) {
+                    $frames.scrollLeft(newPos);
+                    walkListen = true;
 
+                } else {
+                    $frames.animate({
+                        scrollLeft: newPos
+                    }, {
+                        duration: 400,
+                        complete: function() {
+                            walkListen = true;
+                        }
+                    });
+                }
+
+            }
         }
 
         /**
@@ -212,6 +236,8 @@
          * Returns a sequence in the vm.sequences object.
          * If it doesn't exist, create it.
          *
+         * @todo -- order sequences correctly.
+         *
          * @param number level
          * @param boolean replace | optional
          * @return Sequence
@@ -221,13 +247,22 @@
             if (typeof vm.sequences[index] === 'undefined') {
                 console.log('new sequence', index);
                 vm.sequences[index] = new Sequence(level);
-//                sequenceCount++;
+
             } else if (replace) {
                 console.log('replace sequence', index);
                 vm.sequences[index] = new Sequence(level);
             }
 
             return vm.sequences[index];
+        }
+
+        /**
+         * Returns the current Sequence object
+         *
+         * @return Sequence
+         */
+        function getCurrentSequence() {
+            return getSequence(sequenceIndex + 1);
         }
 
         console.log('StoryCtrl', vm);
