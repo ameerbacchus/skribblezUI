@@ -24,13 +24,12 @@
         // view properties
         vm.sequences = [];
         vm.storyTitle = '';
+        vm.sequenceIndex = 0;
 
         // services
         var Api = SkribblezApiService;
 
         // other vars
-        var sequenceIndex = 0;
-        vm.sequenceIndex = 0;
         var walkListen = true;
 
         // the kick-off!
@@ -44,8 +43,7 @@
             if (walkListen && vm.sequenceIndex > 0) {
                 walkListen = false;
 
-                sequenceIndex--;
-                vm.sequenceIndex = sequenceIndex;
+                vm.sequenceIndex--;
                 $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
             }
         });
@@ -55,8 +53,7 @@
             if (walkListen && vm.sequenceIndex < vm.sequences.length - 1) {
                 walkListen = false;
 
-                sequenceIndex++;
-                vm.sequenceIndex = sequenceIndex;
+                vm.sequenceIndex++;
                 $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
             }
         });
@@ -155,7 +152,7 @@
          * @return Sequence
          */
         function getCurrentSequence() {
-            return getSequence(sequenceIndex + 1);
+            return getSequence(vm.sequenceIndex + 1);
         }
 
         console.log('StoryCtrl', vm);
