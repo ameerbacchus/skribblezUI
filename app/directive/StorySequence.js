@@ -74,7 +74,6 @@
                             }, {
                                 duration: 400,
                                 complete: function() {
-                                    // @todo
                                     $scope.$emit(EVENT_NS.STORY + 'walkEnd');
                                 }
                             });
