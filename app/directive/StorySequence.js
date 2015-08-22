@@ -22,12 +22,12 @@
 
                 // watch vars
                 $scope.$watch('frameIndex', function(newFrameIndex, oldFrameIndex) {
+                    var skipAnimation = true;
                     if (newFrameIndex !== frameIndex) {
+                        skipAnimation = false;
                         frameIndex = newFrameIndex;
-                        scrollToFrame(frameIndex, false);
-                    } else {
-                        scrollToFrame(frameIndex, true);
                     }
+                    scrollToFrame(frameIndex, skipAnimation);
                 });
 
                 // window resize handler

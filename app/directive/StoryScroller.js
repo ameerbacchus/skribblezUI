@@ -21,12 +21,12 @@
 
                 // watch vars
                 $scope.$watch('sequenceIndex', function(newSequenceIndex, oldSequenceIndex) {
+                    var skipAnimation = true;
                     if (newSequenceIndex !== sequenceIndex) {
+                        skipAnimation = false;
                         sequenceIndex = newSequenceIndex;
-                        scrollToSequence(sequenceIndex, false);
-                    } else {
-                        scrollToSequence(sequenceIndex, true);
                     }
+                    scrollToSequence(sequenceIndex, skipAnimation);
                 });
 
                 // window resize handler
