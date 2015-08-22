@@ -11,6 +11,12 @@
         // API url -- @todo -- update before going live
         .constant('API_URL', 'http://api-local.skribblez.com:8380/')
 
+        // event namespace constants
+        .constant('EVENT_NS', {
+            GLOBAL: 'Skribblez:',
+            STORY: 'Skribblez:Story:'
+        })
+
         // Route urls
         .constant('ROUTES', {
             home: '/',
@@ -30,6 +36,7 @@
     app
         .config(['$routeProvider', 'ROUTES', 'TEMPLATES', function($routeProvider, ROUTES, TEMPLATES) {
             $routeProvider
+
                 // Home page
                 .when(ROUTES.home, {
                     templateUrl: TEMPLATES.home,

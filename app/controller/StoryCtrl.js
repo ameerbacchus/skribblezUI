@@ -3,9 +3,10 @@
 
     angular.module('skribblez')
         .controller('StoryCtrl', [
+            '$scope',
             '$routeParams',
+            'EVENT_NS',
 //            '$location',
-//            '$scope',
 //            'ROUTES',
 //            'UtilService',
             'SkribblezApiService',
@@ -15,7 +16,7 @@
     /**
      * StoryCtrl
      */
-    function StoryCtrl($routeParams, SkribblezApiService) {
+    function StoryCtrl($scope, $routeParams, EVENT_NS, SkribblezApiService) {
 
         // assign 'this' to a var so we always have a simple reference to it
         var vm = this;
@@ -23,12 +24,12 @@
         // view properties
         vm.sequences = [];
         vm.storyTitle = '';
+        vm.sequenceIndex = 0;
 
         // services
         var Api = SkribblezApiService;
 
         // other vars
-        var sequenceIndex = 0;
         var walkListen = true;
 
         // the kick-off!
@@ -37,168 +38,54 @@
         // event handlers
         var $scrollContainer = $('#story-view div.story-wrapper');    // parent container of 'sequence' dom elements; the 'sk-story-sequence' directive
 
-        /**
-         * Scroll wheel handler
-         */
-        $scrollContainer.on('mousewheel DOMMouseScroll', function(evt) {
+        // scroll 'up' to the previous sequence
+        $scope.$on(EVENT_NS.STORY + 'walkUp', function() {
+            if (walkListen && vm.sequenceIndex > 0) {
+                walkListen = false;
 
-            // @todo -- find an 'angular' way to do this
+                vm.sequenceIndex--;
+                $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+            }
+        });
 
+        // scroll 'down' to the next sequence
+        $scope.$on(EVENT_NS.STORY + 'walkDown', function() {
+            if (walkListen && vm.sequenceIndex < vm.sequences.length - 1) {
+                walkListen = false;
+
+                vm.sequenceIndex++;
+                $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+            }
+        });
+
+        // scroll 'left' to the previous chapter
+        $scope.$on(EVENT_NS.STORY + 'walkLeft', function() {
             if (walkListen) {
-                var $scrollContainer = $(this),
-                    $sequence = null,
-                    deltaY = 0,
-                    incr = 0;
-
-                switch (evt.type) {
-                    case 'mousewheel':    // Chrome, IE
-                        deltaY = -evt.originalEvent.wheelDelta;
-                        break;
-
-                    case 'DOMMouseScroll':    // Firefox
-                        deltaY = evt.originalEvent.detail;
-                        break;
-
-                    default:
-                        break;
-                }
-
-                if (deltaY < 0 && sequenceIndex > 0) {
-                    incr = -1;    // go up
-
-                } else if (deltaY > 0 && sequenceIndex < vm.sequences.length - 1) {
-                    incr = 1;    // go down
-                }
-
-                if (incr !== 0) {
-                    sequenceIndex = sequenceIndex + incr;
-                    scrollToSequence(sequenceIndex);
+                var sequence = getCurrentSequence();
+                if (sequence.hasPrevChapter()) {
+                    walkListen = false;
+                    sequence.frameIndex--;
+                    $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
                 }
             }
         });
 
-        /**
-         * Window resize handler
-         */
-        $(window).off('resize').on('resize', function(evt) {
-            var sequence = getCurrentSequence();
-            scrollToSequence(sequenceIndex, true);
-            scrollToFrame(sequence.frameIndex, true);
-        });
-
-        /**
-         * Arrow key handler
-         *
-         * @todo -- set ng-keyup or ng-keydown on the window object and broadcast an event down from there
-         */
-        $(window).off('keydown').on('keydown', function(evt) {
+        // scroll 'right' to the next chapter
+        $scope.$on(EVENT_NS.STORY + 'walkRight', function() {
             if (walkListen) {
-                var KEYCODES = {
-                    LEFT: 37,
-                    UP: 38,
-                    RIGHT: 39,
-                    DOWN: 40
-                };
-
-                switch (evt.keyCode) {
-                    case KEYCODES.LEFT:
-                        var sequence = getCurrentSequence();
-                        if (sequence.hasPrevChapter()) {
-                            sequence.frameIndex--;
-                            scrollToFrame(sequence.frameIndex);
-                        }
-                        break;
-
-                    case KEYCODES.UP:
-                        if (sequenceIndex > 0) {
-                            sequenceIndex--;
-                            scrollToSequence(sequenceIndex);
-                        }
-                        break;
-
-                    case KEYCODES.RIGHT:
-                        var sequence = getCurrentSequence();
-                        if (sequence.hasNextChapter()) {
-                            sequence.frameIndex++;
-                            scrollToFrame(sequence.frameIndex);
-                        }
-                        break;
-
-                    case KEYCODES.DOWN:
-                        if (sequenceIndex < vm.sequences.length - 1) {
-                            sequenceIndex++;
-                            scrollToSequence(sequenceIndex);
-                        }
-                        break;
-
-                    default:
-                        break;
+                var sequence = getCurrentSequence();
+                if (sequence.hasNextChapter()) {
+                    walkListen = false;
+                    sequence.frameIndex++;
+                    $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
                 }
             }
         });
 
-        /**
-         * Scroll vertically to a specific sequence
-         *
-         * @param number index
-         * @param boolean skipAnimation | optional
-         */
-        function scrollToSequence(index, skipAnimation) {
-            walkListen = false;
-
-            var $sequence = $scrollContainer.find('.sequence').eq(index);
-
-            if ($sequence && $sequence.length) {
-                var newPos = $scrollContainer.scrollTop() + $sequence.position().top;
-                if (skipAnimation) {
-                    $scrollContainer.scrollTop(newPos);
-                    walkListen = true;
-
-                } else {
-                    $scrollContainer.animate({
-                        scrollTop: newPos
-                    }, {
-                        duration: 400,
-                        complete: function() {
-                            walkListen = true;
-                        }
-                    });
-                }
-            }
-        }
-
-        /**
-         * Scroll horizontally to a specific frame
-         *
-         * @param number index
-         * @param boolean skipAnimation | optional
-         */
-        function scrollToFrame(index, skipAnimation) {
-            walkListen = false;
-
-            var $sequence = $scrollContainer.find('.sequence').eq(sequenceIndex),
-                $frames = $sequence.find('div.frames'),
-                $targetFrame = $frames.find('div.frame').eq(index),
-                newPos = $targetFrame.outerWidth() * index;
-
-            if ($targetFrame && $targetFrame.length) {
-                if (skipAnimation) {
-                    $frames.scrollLeft(newPos);
-                    walkListen = true;
-
-                } else {
-                    $frames.animate({
-                        scrollLeft: newPos
-                    }, {
-                        duration: 400,
-                        complete: function() {
-                            walkListen = true;
-                        }
-                    });
-                }
-
-            }
-        }
+        // fired at the end of a sequence/frame transition
+        $scope.$on(EVENT_NS.STORY + 'walkEnd', function() {
+            walkListen = true;
+        });
 
         /**
          * Calls the API to request a chapter
@@ -265,7 +152,7 @@
          * @return Sequence
          */
         function getCurrentSequence() {
-            return getSequence(sequenceIndex + 1);
+            return getSequence(vm.sequenceIndex + 1);
         }
 
         console.log('StoryCtrl', vm);
@@ -335,7 +222,7 @@
     };
 
     /**
-     * @todo
+     * Returns whether or not there is a chapter to the 'left' of the current one
      *
      * @return boolean
      */
@@ -344,7 +231,7 @@
     };
 
     /**
-     * @todo
+     * Returns whether or not there is a chapter to the 'right' of the current one
      *
      * @return boolean
      */
