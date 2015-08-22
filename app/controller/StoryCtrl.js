@@ -81,51 +81,51 @@
          *
          * @todo -- set ng-keyup or ng-keydown on the window object and broadcast an event down from there
          */
-        $(window).off('keydown').on('keydown', function(evt) {
-            if (walkListen) {
-                var KEYCODES = {
-                    LEFT: 37,
-                    UP: 38,
-                    RIGHT: 39,
-                    DOWN: 40
-                };
-
-                switch (evt.keyCode) {
-                    case KEYCODES.LEFT:
-                        var sequence = getCurrentSequence();
-                        if (sequence.hasPrevChapter()) {
-                            sequence.frameIndex--;
-                            scrollToFrame(sequence.frameIndex);
-                        }
-                        break;
-
-                    case KEYCODES.UP:
-                        if (sequenceIndex > 0) {
-                            vm.sequenceIndex = sequenceIndex--;
-//                            scrollToSequence(sequenceIndex);
-                        }
-                        break;
-
-                    case KEYCODES.RIGHT:
-                        var sequence = getCurrentSequence();
-                        if (sequence.hasNextChapter()) {
-                            sequence.frameIndex++;
-                            scrollToFrame(sequence.frameIndex);
-                        }
-                        break;
-
-                    case KEYCODES.DOWN:
-                        if (sequenceIndex < vm.sequences.length - 1) {
-                            vm.sequenceIndex = sequenceIndex++;
-//                            scrollToSequence(sequenceIndex);
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        });
+//        $(window).off('keydown').on('keydown', function(evt) {
+//            if (walkListen) {
+//                var KEYCODES = {
+//                    LEFT: 37,
+//                    UP: 38,
+//                    RIGHT: 39,
+//                    DOWN: 40
+//                };
+//
+//                switch (evt.keyCode) {
+//                    case KEYCODES.LEFT:
+//                        var sequence = getCurrentSequence();
+//                        if (sequence.hasPrevChapter()) {
+//                            sequence.frameIndex--;
+//                            scrollToFrame(sequence.frameIndex);
+//                        }
+//                        break;
+//
+//                    case KEYCODES.UP:
+//                        if (sequenceIndex > 0) {
+//                            vm.sequenceIndex = sequenceIndex--;
+////                            scrollToSequence(sequenceIndex);
+//                        }
+//                        break;
+//
+//                    case KEYCODES.RIGHT:
+//                        var sequence = getCurrentSequence();
+//                        if (sequence.hasNextChapter()) {
+//                            sequence.frameIndex++;
+//                            scrollToFrame(sequence.frameIndex);
+//                        }
+//                        break;
+//
+//                    case KEYCODES.DOWN:
+//                        if (sequenceIndex < vm.sequences.length - 1) {
+//                            vm.sequenceIndex = sequenceIndex++;
+////                            scrollToSequence(sequenceIndex);
+//                        }
+//                        break;
+//
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
 
         /**
          * Scroll horizontally to a specific frame

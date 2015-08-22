@@ -61,6 +61,22 @@
                     }
                 });
 
+                // window keydown handler
+                $scope.$on(EVENT_NS.GLOBAL + 'keydown', function(e, evt, keyName) {
+                    switch (keyName) {
+                        case 'upArrow':
+                            $scope.$emit(NS + 'walkUp');
+                            break;
+
+                        case 'downArrow':
+                            $scope.$emit(NS + 'walkDown');
+                            break;
+
+                        default:
+                            break;
+                    }
+                });
+
                 /**
                  * Scroll vertically to a specific sequence
                  *
