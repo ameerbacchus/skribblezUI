@@ -381,6 +381,8 @@
     };
 
     /**
+     * Replaces a chapter in this Sequence.  Used for when a shallow-loaded chapter needs
+     * to be replaced by a fully loaded one.
      *
      * @param ChapterModel chapter
      * @return this
