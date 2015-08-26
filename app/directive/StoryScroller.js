@@ -21,11 +21,19 @@
 
                 // watch vars
                 $scope.$watch('sequenceIndex', function(newSequenceIndex, oldSequenceIndex) {
+
                     var skipAnimation = true;
                     if (newSequenceIndex !== sequenceIndex) {
                         skipAnimation = false;
-                        sequenceIndex = newSequenceIndex;
                     }
+
+                    sequenceIndex = newSequenceIndex;
+
+                    var diff = newSequenceIndex - oldSequenceIndex;
+                    if (diff !== 1 && diff !== -1) {
+                        skipAnimation = true;
+                    }
+
                     scrollToSequence(sequenceIndex, skipAnimation);
                 });
 

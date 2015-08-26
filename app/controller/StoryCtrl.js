@@ -22,7 +22,9 @@
         var vm = this;
 
         // view properties
-        vm.sequences = [];
+//        vm.sequences = [];
+        vm.sequences = {};
+        vm.currentSequence = null;
         vm.storyTitle = '';
         vm.sequenceIndex = 0;
 
@@ -30,6 +32,8 @@
         var Api = SkribblezApiService;
 
         // other vars
+        var sequenceCount = 0;
+//        var currentSequence = null;
         var walkListen = true;
 
         /*
@@ -37,32 +41,41 @@
          */
         // scroll 'up' to the previous sequence
         $scope.$on(EVENT_NS.STORY + 'walkUp', function() {
-            if (walkListen && vm.sequenceIndex > 0) {
+            if (walkListen && vm.currentSequence.level > 1) {
                 walkListen = false;
-
-                vm.sequenceIndex--;
+                vm.currentSequence = vm.sequences[vm.currentSequence.level - 1];
+                setSequenceIndex();
                 $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+
+                loadActiveChapter();
             }
         });
 
         // scroll 'down' to the next sequence
         $scope.$on(EVENT_NS.STORY + 'walkDown', function() {
-            if (walkListen && vm.sequenceIndex < vm.sequences.length - 1) {
+            if (walkListen && typeof vm.sequences[vm.currentSequence.level + 1] !== 'undefined') {
                 walkListen = false;
-
-                vm.sequenceIndex++;
+                vm.currentSequence = vm.sequences[vm.currentSequence.level + 1];
+                setSequenceIndex();
                 $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+
+                loadActiveChapter();
             }
         });
 
         // scroll 'left' to the previous chapter
         $scope.$on(EVENT_NS.STORY + 'walkLeft', function() {
             if (walkListen) {
-                var sequence = getCurrentSequence();
+                var sequence = vm.currentSequence;
                 if (sequence.hasPrevChapter()) {
                     walkListen = false;
                     sequence.frameIndex--;
                     $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+
+                    console.log('walkLeft', vm);
+
+                    cleanupSequences();
+                    loadActiveChapter();
                 }
             }
         });
@@ -70,11 +83,16 @@
         // scroll 'right' to the next chapter
         $scope.$on(EVENT_NS.STORY + 'walkRight', function() {
             if (walkListen) {
-                var sequence = getCurrentSequence();
+                var sequence = vm.currentSequence;
                 if (sequence.hasNextChapter()) {
                     walkListen = false;
                     sequence.frameIndex++;
                     $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
+
+                    console.log('walkRight', vm);
+
+                    cleanupSequences();
+                    loadActiveChapter();
                 }
             }
         });
@@ -85,77 +103,147 @@
         });
 
         /**
-         * Calls the API to request a chapter
-         *
-         * @param string chapterId
+         * @todo
          */
-        function loadChapter(chapterId) {
-            console.log('loadChapter', chapterId);
-            Api.getChapter(chapterId).then(function(chapter) {
-                var storyTitle = chapter.title;
-                if (chapter.parent) {
-                    storyTitle = chapter.parent.title;
-                }
-                vm.storyTitle = storyTitle;
+        function loadActiveChapter() {
+            var sequence = vm.currentSequence,
+                currentChapter = sequence.getCurrentChapter();
 
-                getSequence(chapter.sequence).addChapter(chapter);
+            var promise;
+            if (currentChapter.getFullyLoaded()) {
+                promise = $.Deferred().resolve(currentChapter);
+            } else {
+                promise = Api.getChapter(currentChapter.guid).then(function(chap) {
+                    chap.setFullyLoaded(true);
+                    return chap;
+                });
+            }
 
-                // request the previous chapter to get this chapter's siblings
-//                if (chapter.prev) {
-//                    Api.getChapter(chapter.prev.guid).then(function(prevChapter) {
-//                        // @todo
-//                    });
+            promise.then(function(chapter) {
+                console.log('loaded', chapter);
+                sequence.addChapter(chapter);
+
+                var level = vm.currentSequence.level,
+                    prev = null,
+                    curr = [],
+                    next = [];
+
+                var prevLevel = chapter.sequence - 1;
+
+                var prevPromise;
+                prevPromise = $.Deferred().resolve();
+
+                buildSequence(level + 1, chapter.next);
+
+//                if (chapter.prev && typeof vm.sequences[prevLevel] === 'undefined') {
+//                    // @todo -- load siblings
+//                    prevPromise = Api.getChapter(chapter.prev.guid);
+//                } else {
+//                    prevPromise = $.Deferred().resolve();
 //                }
-
-                if (chapter.next.length > 0) {
-                    getSequence(chapter.sequence + 1, true).addChapters(chapter.next);
-                    console.log('vm.sequences 1', vm.sequences);
-                } else {
-                    // @todo -- remove later sequences
-                    console.log('vm.sequences 2', vm.sequences);
-                }
-
-                return chapter;
             });
         }
 
         /**
-         * Returns a sequence in the vm.sequences object.
-         * If it doesn't exist, create it.
-         *
-         * @todo -- order sequences correctly.
-         *
-         * @param number level
-         * @param boolean replace | optional
-         * @return Sequence
+         * @todo
          */
-        function getSequence(level, replace) {
-            var index = level - 1;
-            if (typeof vm.sequences[index] === 'undefined') {
-                console.log('new sequence', index);
-                vm.sequences[index] = new Sequence(level);
+        function init() {
 
-            } else if (replace) {
-                console.log('replace sequence', index);
-                vm.sequences[index] = new Sequence(level);
-            }
+            var level = 1,
+                prev = null,
+                curr = [],
+                next = [];
 
-            return vm.sequences[index];
+            Api.getChapter($routeParams.chapterId)
+                .then(function(chapter) {
+                    chapter.setFullyLoaded(true);
+                    curr = [chapter];
+                    next = chapter.next;
+                    level = chapter.sequence;
+                    return chapter.prev;
+                })
+                .then(function(prevChapter) {
+                    if (prevChapter) {
+                        prev = prevChapter;
+                        return Api.getChapter(prevChapter.guid).then(function(previous) {
+                            return previous.next;
+                        });
+                    } else {
+                        return $.Deferred().resolve(null);
+                    }
+                })
+                .then(function(siblings) {
+                    if (siblings) {
+                        curr = siblings;
+                    }
+
+                    if (prev) {
+                        if (typeof vm.sequences[level - 1] === 'undefined') {
+                            // @todo
+                            console.log('load previous sequence');
+                        }
+                    }
+
+                    var currSequence = vm.currentSequence = buildSequence(level, curr);
+                    var nextSequence = buildSequence(level + 1, next);
+                });
         }
 
         /**
-         * Returns the current Sequence object
-         *
-         * @return Sequence
+         * @todo
          */
-        function getCurrentSequence() {
-            return getSequence(vm.sequenceIndex + 1);
+        function buildSequence(level, chapters) {
+            if (chapters.length > 0) {
+                var sequence = null;
+                if (typeof vm.sequences[level] === 'undefined') {
+                    sequence = new Sequence(level);
+                } else {
+                    sequence = vm.sequences[level];
+                }
+
+                sequence.addChapters(chapters);
+                vm.sequences[level] = sequence;
+                return sequence;
+            }
+
+            return null;
+        }
+
+        /**
+         * Loops through all sequences to figure out the current sequence index.
+         * Sequences can be added before or after other sequences, so we need to perform this
+         * loop, rather than keep a running count.
+         */
+        function setSequenceIndex() {
+            var i = 0;
+            for (var level in vm.sequences) {
+                var sequence = vm.sequences[level];
+                if (vm.currentSequence.level === sequence.level) {
+                    vm.sequenceIndex = i;
+                    break;
+                }
+                i++;
+            }
+        }
+
+        /**
+         * @todo
+         */
+        function cleanupSequences() {
+            var currentLevel = vm.currentSequence.level;
+
+            for (var level in vm.sequences) {
+                if (level > currentLevel) {
+                    console.log('delete level ', level);
+                    delete vm.sequences[level];
+                }
+            }
         }
 
         console.log('StoryCtrl', vm);
 
         // the kick-off!
-        loadChapter($routeParams.chapterId);
+        init();
     }
 
     /**
@@ -219,6 +307,15 @@
         }
 
         return this;
+    };
+
+    /**
+     * Returns the current chapter
+     *
+     * @return ChapterModel
+     */
+    Sequence.prototype.getCurrentChapter = function() {
+        return this.chapters[this.frameIndex];
     };
 
     /**

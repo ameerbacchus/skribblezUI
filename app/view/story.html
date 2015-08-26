@@ -1,7 +1,7 @@
 <div id="story-view">
     <div class="story-container">
-        <div class="story-wrapper" sk-story-scroller sequence-index="sc.sequenceIndex">
-            <sk-story-sequence is-active="sc.sequenceIndex === sequence.level - 1" ng-repeat="sequence in sc.sequences" sequence="sequence" frame-index="sequence.frameIndex" class="sequence"></sk-story-sequence>
+        <div class="story-wrapper" sk-story-scroller sequence-index="sc.sequenceIndex" current-sequence="sc.currentSequence">
+            <sk-story-sequence is-active="sc.currentSequence.level === sequence.level" ng-repeat="sequence in sc.sequences" sequence="sequence" frame-index="sequence.frameIndex" class="sequence"></sk-story-sequence>
         </div>
     </div>
 </div>

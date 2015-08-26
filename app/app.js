@@ -10,6 +10,7 @@
 
         // API url -- @todo -- update before going live
         .constant('API_URL', 'http://api-local.skribblez.com:8380/')
+//        .constant('API_URL', 'http://192.168.1.100:8380/')
 
         // event namespace constants
         .constant('EVENT_NS', {
