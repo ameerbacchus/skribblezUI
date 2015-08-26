@@ -27,6 +27,12 @@
                         skipAnimation = false;
                         frameIndex = newFrameIndex;
                     }
+
+                    var diff = newFrameIndex - oldFrameIndex;
+                    if (diff !== 1 && diff !== -1) {
+                        skipAnimation = true;
+                    }
+
                     scrollToFrame(frameIndex, skipAnimation);
                 });
 

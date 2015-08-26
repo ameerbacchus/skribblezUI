@@ -22,18 +22,16 @@
         var vm = this;
 
         // view properties
-//        vm.sequences = [];
         vm.sequences = {};
         vm.currentSequence = null;
+        vm.sequenceIndex = -1;
         vm.storyTitle = '';
-        vm.sequenceIndex = 0;
 
         // services
         var Api = SkribblezApiService;
 
         // other vars
         var sequenceCount = 0;
-//        var currentSequence = null;
         var walkListen = true;
 
         /*
@@ -149,13 +147,17 @@
          */
         function init() {
 
-            var level = 1,
+            var chapter = null,
+                level = 1,
                 prev = null,
                 curr = [],
                 next = [];
 
-            Api.getChapter($routeParams.chapterId)
-                .then(function(chapter) {
+            var chapterId = $routeParams.chapterId;
+
+            Api.getChapter(chapterId)
+                .then(function(c) {
+                    chapter = c;
                     chapter.setFullyLoaded(true);
                     curr = [chapter];
                     next = chapter.next;
@@ -173,19 +175,43 @@
                     }
                 })
                 .then(function(siblings) {
+                    var i;
+
                     if (siblings) {
                         curr = siblings;
-                    }
-
-                    if (prev) {
-                        if (typeof vm.sequences[level - 1] === 'undefined') {
-                            // @todo
-                            console.log('load previous sequence');
+                        for (i = 0; i < siblings.length; i++) {
+                            var sibling = siblings[i];
+                            if (sibling.guid === chapter.guid) {
+                                siblings[i] = chapter;
+                                break;
+                            }
                         }
                     }
 
+                    // build previous sequence
+                    if (prev) {
+                        if (typeof vm.sequences[level - 1] === 'undefined') {
+                            buildSequence(level - 1, [prev]);
+                        }
+                    }
+
+                    // build current sequence
                     var currSequence = vm.currentSequence = buildSequence(level, curr);
+
+                    // set the frameIndex on the current sequence
+                    for (i = 0; i < currSequence.chapters.length; i++) {
+                        var ch = currSequence.chapters[i];
+                        if (ch.guid === chapterId) {
+                            currSequence.frameIndex = i;
+                            break;
+                        }
+                    }
+
+                    // build next sequence
                     var nextSequence = buildSequence(level + 1, next);
+
+                    // set the current sequence index
+                    setSequenceIndex();
                 });
         }
 
