@@ -20,6 +20,6 @@
         // pull values placed on the directive from the parent scope
         vm.sequence = $scope.sequence;
 
-        console.log('vm.sequence', vm.sequence);
+//        console.log('vm.sequence', vm.sequence);
     }
 })();

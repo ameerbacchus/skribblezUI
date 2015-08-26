@@ -2,7 +2,7 @@
     <div class="frame" ng-repeat="chapter in ssc.sequence.chapters">
         <div class="chapter">
             <div class="top">
-                <h4>chapter</h4>
+                <h4>chapter <span ng-bind="ssc.sequence.level"></span></h4>
                 <div ng-if="chapter.prev">SEE PREV</div>
             </div>
 

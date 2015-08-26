@@ -43,9 +43,8 @@
                 walkListen = false;
                 vm.currentSequence = vm.sequences[vm.currentSequence.level - 1];
                 setSequenceIndex();
-                $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
 
-                loadActiveChapter();
+                loadActiveFrame();
             }
         });
 
@@ -55,9 +54,8 @@
                 walkListen = false;
                 vm.currentSequence = vm.sequences[vm.currentSequence.level + 1];
                 setSequenceIndex();
-                $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
 
-                loadActiveChapter();
+                loadActiveFrame();
             }
         });
 
@@ -68,12 +66,9 @@
                 if (sequence.hasPrevChapter()) {
                     walkListen = false;
                     sequence.frameIndex--;
-                    $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
-
-                    console.log('walkLeft', vm);
 
                     cleanupSequences();
-                    loadActiveChapter();
+                    loadActiveFrame();
                 }
             }
         });
@@ -85,12 +80,9 @@
                 if (sequence.hasNextChapter()) {
                     walkListen = false;
                     sequence.frameIndex++;
-                    $scope.$apply();    // force the change; not sure why this isn't being picked up implicitly
-
-                    console.log('walkRight', vm);
 
                     cleanupSequences();
-                    loadActiveChapter();
+                    loadActiveFrame();
                 }
             }
         });
@@ -101,73 +93,66 @@
         });
 
         /**
-         * @todo
+         * Loads the active chapter.  Very similar to init() -- consolidate these 2 to avoid duplicate code
          */
-        function loadActiveChapter() {
-            var sequence = vm.currentSequence,
-                currentChapter = sequence.getCurrentChapter();
+        function loadActiveFrame() {
+            var sequence = vm.currentSequence;
+            var currentChapter = sequence.getCurrentChapter();
 
-            var promise;
-            if (currentChapter.getFullyLoaded()) {
-                promise = $.Deferred().resolve(currentChapter);
-            } else {
-                promise = Api.getChapter(currentChapter.guid).then(function(chap) {
-                    chap.setFullyLoaded(true);
-                    return chap;
-                });
-            }
+            loadFrame(currentChapter.guid).then(function(data) {
+                var level = data.level,
+                    prevLevel = level - 1,
+                    nextLevel = level + 1;
 
-            promise.then(function(chapter) {
-                console.log('loaded', chapter);
-                sequence.addChapter(chapter);
+                // build previous sequence
+                if (data.previous) {
+                    buildSequence(prevLevel, [data.previous], false);
+                }
 
-                var level = vm.currentSequence.level,
-                    prev = null,
-                    curr = [],
-                    next = [];
+                // build current sequence
+                vm.currentSequence = buildSequence(level, data.current, true, data.chapter);
 
-                var prevLevel = chapter.sequence - 1;
+                // build next sequence
+                if (data.next.length > 0) {
+                    buildSequence(nextLevel, data.next, true);
+                }
 
-                var prevPromise;
-                prevPromise = $.Deferred().resolve();
-
-                buildSequence(level + 1, chapter.next);
-
-//                if (chapter.prev && typeof vm.sequences[prevLevel] === 'undefined') {
-//                    // @todo -- load siblings
-//                    prevPromise = Api.getChapter(chapter.prev.guid);
-//                } else {
-//                    prevPromise = $.Deferred().resolve();
-//                }
+                // get our indexes in order
+                setSequenceIndex();
+                setFrameIndex(data.chapter.guid);
             });
         }
 
         /**
-         * @todo
+         * Calls the Api to request a chapter, it's parent (if one exists) and compiles the data
+         * to build out the Sequences
+         *
+         * @param string chapterId
+         * @return promise
          */
-        function init() {
+        function loadFrame(chapterId) {
+            var chapter,
+                data = {
+                    level: 1,
+                    previous: null,
+                    current: [],
+                    next: [],
+                    chapter: null
+                };
 
-            var chapter = null,
-                level = 1,
-                prev = null,
-                curr = [],
-                next = [];
-
-            var chapterId = $routeParams.chapterId;
-
-            Api.getChapter(chapterId)
+            return Api.getChapter(chapterId)
                 .then(function(c) {
                     chapter = c;
                     chapter.setFullyLoaded(true);
-                    curr = [chapter];
-                    next = chapter.next;
-                    level = chapter.sequence;
-                    return chapter.prev;
+                    data.chapter = chapter;
+                    data.level = chapter.sequence;
+                    data.next = chapter.next;
+                    return chapter;
                 })
-                .then(function(prevChapter) {
-                    if (prevChapter) {
-                        prev = prevChapter;
-                        return Api.getChapter(prevChapter.guid).then(function(previous) {
+                .then(function(chapter) {
+                    if (chapter.prev) {
+                        return Api.getChapter(chapter.prev.guid).then(function(previous) {
+                            data.previous = previous;
                             return previous.next;
                         });
                     } else {
@@ -175,64 +160,97 @@
                     }
                 })
                 .then(function(siblings) {
-                    var i;
-
-                    if (siblings) {
-                        curr = siblings;
-                        for (i = 0; i < siblings.length; i++) {
-                            var sibling = siblings[i];
-                            if (sibling.guid === chapter.guid) {
-                                siblings[i] = chapter;
-                                break;
-                            }
-                        }
-                    }
-
-                    // build previous sequence
-                    if (prev) {
-                        if (typeof vm.sequences[level - 1] === 'undefined') {
-                            buildSequence(level - 1, [prev]);
-                        }
-                    }
-
-                    // build current sequence
-                    var currSequence = vm.currentSequence = buildSequence(level, curr);
-
-                    // set the frameIndex on the current sequence
-                    for (i = 0; i < currSequence.chapters.length; i++) {
-                        var ch = currSequence.chapters[i];
-                        if (ch.guid === chapterId) {
-                            currSequence.frameIndex = i;
-                            break;
-                        }
-                    }
-
-                    // build next sequence
-                    var nextSequence = buildSequence(level + 1, next);
-
-                    // set the current sequence index
-                    setSequenceIndex();
+                    data.current = siblings ? injectSibling(chapter, siblings) : [chapter];
+                    return data;
                 });
         }
 
         /**
-         * @todo
+         * Load the current chapter (with the passed in guid) and build out the necessary Sequences
          */
-        function buildSequence(level, chapters) {
-            if (chapters.length > 0) {
-                var sequence = null;
-                if (typeof vm.sequences[level] === 'undefined') {
-                    sequence = new Sequence(level);
-                } else {
-                    sequence = vm.sequences[level];
+        function init() {
+            loadFrame($routeParams.chapterId).then(function(data) {
+                var level = data.level,
+                    prevLevel = level - 1,
+                    nextLevel = level + 1;
+
+                // build out empty sequences so we can get all the way up to level 1 without errors and animation bugs
+                if (prevLevel > 1) {
+                    for (var i = 1; i < prevLevel; i++) {
+                        buildSequence(i, [], false);
+                    }
                 }
 
-                sequence.addChapters(chapters);
-                vm.sequences[level] = sequence;
-                return sequence;
+                // build previous sequence
+                if (data.previous) {
+                    buildSequence(prevLevel, [data.previous], false);
+                }
+
+                // build current sequence
+                vm.currentSequence = buildSequence(level, data.current, true, data.chapter);
+
+                // build next sequence
+                if (data.next.length > 0) {
+                    buildSequence(nextLevel, data.next, true);
+                }
+
+                // get our indexes in order
+                setSequenceIndex();
+                setFrameIndex(data.chapter.guid);
+            });
+        }
+
+        /**
+         * Replaces a single chapter in the siblings array
+         * This is used to replace a shallow-loaded chapter with a fully loaded one
+         *
+         * @param ChapterModel chapter
+         * @param array<ChapterModel> siblings
+         * @return array<ChapterModel> siblings
+         */
+        function injectSibling(chapter, siblings) {
+            for (var i = 0; i < siblings.length; i++) {
+                var sibling = siblings[i];
+                if (sibling.guid === chapter.guid) {
+                    siblings[i] = chapter;
+                    break;
+                }
             }
 
-            return null;
+            return siblings;
+        }
+
+        /**
+         * Build out a Sequence object.  Retrieves an existing one if it has already been built.
+         *
+         * @param int level
+         * @param array<ChapterModel> chapters
+         * @param boolean fullLoad
+         * @param ChapterModel chapterReplacement
+         * @return Sequence
+         */
+        function buildSequence(level, chapters, fullLoad, chapterReplacement) {
+            var sequence = null;
+            if (typeof vm.sequences[level] === 'undefined') {
+                sequence = new Sequence(level);
+                sequence.setChapters(chapters);
+            } else {
+                sequence = vm.sequences[level];
+                if (!sequence.loaded) {
+                    sequence.setChapters(chapters);
+                }
+            }
+
+            if (fullLoad) {
+                sequence.setLoaded(true);
+            }
+
+            if (typeof chapterReplacement !== 'undefined') {
+                sequence.replaceChapter(chapterReplacement);
+            }
+
+            vm.sequences[level] = sequence;
+            return sequence;
         }
 
         /**
@@ -253,14 +271,31 @@
         }
 
         /**
-         * @todo
+         * Sets the frame index in a Sequence based on the chapterId passed
+         *
+         * @param string chapterId
+         */
+        function setFrameIndex(chapterId) {
+            // set the frameIndex on the current sequence
+            var currSequence = vm.currentSequence;
+            for (var i = 0; i < currSequence.chapters.length; i++) {
+                var ch = currSequence.chapters[i];
+                if (ch.guid === chapterId) {
+                    currSequence.frameIndex = i;
+                    break;
+                }
+            }
+        }
+
+        /**
+         * Deletes unnecessary Sequences.  Used for when we 'walkLeft' or 'walkRight' and
+         * later Sequences need to be removed.
          */
         function cleanupSequences() {
             var currentLevel = vm.currentSequence.level;
 
             for (var level in vm.sequences) {
                 if (level > currentLevel) {
-                    console.log('delete level ', level);
                     delete vm.sequences[level];
                 }
             }
@@ -282,6 +317,7 @@
         this.chapters = [];
         this.chapterMap = {};
         this.frameIndex = 0;
+        this.loaded = false;
     }
 
     /**
@@ -342,6 +378,35 @@
      */
     Sequence.prototype.getCurrentChapter = function() {
         return this.chapters[this.frameIndex];
+    };
+
+    /**
+     *
+     * @param ChapterModel chapter
+     * @return this
+     */
+    Sequence.prototype.replaceChapter = function(chapter) {
+        this.chapterMap[chapter.guid] = chapter;
+
+        for (var i = 0; i < this.chapters.length; i++) {
+            if (this.chapters[i].guid === chapter.guid) {
+                this.chapters[i] = chapter;
+                break;
+            }
+        }
+
+        return this;
+    };
+
+    /**
+     * [Setter]
+     *
+     * @param boolean loaded
+     * @return this
+     */
+    Sequence.prototype.setLoaded = function(loaded) {
+        this.loaded = loaded;
+        return this;
     };
 
     /**
